@@ -103,6 +103,78 @@ describe("Utilify", () => {
     });
   });
 
+  describe("toKebabCase", () => {
+    it("should convert camelCase to kebab-case", () => {
+      expect(Utilify.toKebabCase("camelCase")).toBe("camel-case");
+      expect(Utilify.toKebabCase("helloWorld")).toBe("hello-world");
+    });
+
+    it("should convert PascalCase to kebab-case", () => {
+      expect(Utilify.toKebabCase("PascalCase")).toBe("pascal-case");
+      expect(Utilify.toKebabCase("HelloWorld")).toBe("hello-world");
+    });
+
+    it("should convert spaces and underscores to hyphens", () => {
+      expect(Utilify.toKebabCase("hello world")).toBe("hello-world");
+      expect(Utilify.toKebabCase("hello_world")).toBe("hello-world");
+      expect(Utilify.toKebabCase("hello_world test")).toBe("hello-world-test");
+    });
+
+    it("should handle already kebab-case strings", () => {
+      expect(Utilify.toKebabCase("already-kebab-case")).toBe(
+        "already-kebab-case",
+      );
+      expect(Utilify.toKebabCase("kebab-case-string")).toBe(
+        "kebab-case-string",
+      );
+    });
+
+    it("should convert to lowercase", () => {
+      expect(Utilify.toKebabCase("HELLO_WORLD")).toBe("hello-world");
+      expect(Utilify.toKebabCase("CamelCase")).toBe("camel-case");
+    });
+
+    it("should handle empty strings", () => {
+      expect(Utilify.toKebabCase("")).toBe("");
+    });
+  });
+
+  describe("toSnakeCase", () => {
+    it("should convert camelCase to snake_case", () => {
+      expect(Utilify.toSnakeCase("camelCase")).toBe("camel_case");
+      expect(Utilify.toSnakeCase("helloWorld")).toBe("hello_world");
+    });
+
+    it("should convert PascalCase to snake_case", () => {
+      expect(Utilify.toSnakeCase("PascalCase")).toBe("pascal_case");
+      expect(Utilify.toSnakeCase("HelloWorld")).toBe("hello_world");
+    });
+
+    it("should convert spaces and hyphens to underscores", () => {
+      expect(Utilify.toSnakeCase("hello world")).toBe("hello_world");
+      expect(Utilify.toSnakeCase("hello-world")).toBe("hello_world");
+      expect(Utilify.toSnakeCase("hello-world test")).toBe("hello_world_test");
+    });
+
+    it("should handle already snake_case strings", () => {
+      expect(Utilify.toSnakeCase("already_snake_case")).toBe(
+        "already_snake_case",
+      );
+      expect(Utilify.toSnakeCase("snake_case_string")).toBe(
+        "snake_case_string",
+      );
+    });
+
+    it("should convert to lowercase", () => {
+      expect(Utilify.toSnakeCase("HELLO_WORLD")).toBe("hello_world");
+      expect(Utilify.toSnakeCase("CamelCase")).toBe("camel_case");
+    });
+
+    it("should handle empty strings", () => {
+      expect(Utilify.toSnakeCase("")).toBe("");
+    });
+  });
+
   describe("debounce", () => {
     beforeEach(() => {
       jest.useFakeTimers();

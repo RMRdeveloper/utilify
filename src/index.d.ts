@@ -3,6 +3,8 @@ declare class Utilify {
   static isObject(value: unknown): boolean;
   static isEmpty(value: unknown): boolean;
   static capitalize(value: string): string;
+  static toKebabCase(value: string): string;
+  static toSnakeCase(value: string): string;
   static debounce<T extends (...args: any[]) => any>(fn: T, delay?: number): T;
 }
 
@@ -12,4 +14,6 @@ export * from "./core/validation/is-json";
 export * from "./core/validation/is-object";
 export * from "./core/validation/is-empty";
 export * from "./core/strings/capitalize";
+export * from "./core/strings/to-kebab-case";
+export * from "./core/strings/to-snake-case";
 export * from "./core/ejecution/debounce";
