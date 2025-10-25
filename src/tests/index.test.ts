@@ -1,4 +1,4 @@
-import Utilify from "../src/index";
+import Utilify from "../index";
 
 describe("Utilify", () => {
   describe("isJson", () => {

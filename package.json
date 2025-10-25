@@ -1,5 +1,5 @@
 {
-  "name": "utilify",
+  "name": "utilifycore",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "helpers",
     "tools"
   ],
-  "author": "Ronald Moreno <rmorenorodriguez16@gmail.com>",
+  "author": "Ronald Moreno <ronaldmorenorodriguez1990@gmail.com>",
   "license": "MIT",
   "description": "A utility library for JavaScript and TypeScript projects.",
   "files": [
