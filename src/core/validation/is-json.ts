@@ -1,5 +1,5 @@
-import UtilifyException from "./exception-handler";
-import safeRun from "./runners/safe-run";
+import UtilifyException from "../exception-handler";
+import safeRun from "../runners/safe-run";
 
 const isJson = (value: unknown): value is string => {
   return safeRun(() => {

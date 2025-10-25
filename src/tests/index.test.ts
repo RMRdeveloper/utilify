@@ -80,4 +80,16 @@ describe("Utilify", () => {
       expect(Utilify.isEmpty(false)).toBe(false);
     });
   });
+
+  describe("capitalize", () => {
+    it("should capitalize the first letter of a string", () => {
+      expect(Utilify.capitalize("hello")).toBe("Hello");
+      expect(Utilify.capitalize("world")).toBe("World");
+      expect(Utilify.capitalize("")).toBe("");
+    });
+
+    it("should return the original string if it is empty", () => {
+      expect(Utilify.capitalize("")).toBe("");
+    });
+  });
 });

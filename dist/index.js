@@ -5,26 +5,15 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_json_1 = __importDefault(require("./core/is-json"));
-const is_object_1 = __importDefault(require("./core/is-object"));
-const is_empty_1 = __importDefault(require("./core/is-empty"));
+const is_json_1 = __importDefault(require("./core/validation/is-json"));
+const is_object_1 = __importDefault(require("./core/validation/is-object"));
+const is_empty_1 = __importDefault(require("./core/validation/is-empty"));
+const capitalize_1 = __importDefault(require("./core/strings/capitalize"));
 class Utilify {
-  static isJson(value) {
-    return (0, is_json_1.default)(value);
-  }
-  static isObject(value) {
-    return (0, is_object_1.default)(value);
-  }
-  static isEmpty(value) {
-    return (0, is_empty_1.default)(value);
-  }
+  static isJson = (value) => (0, is_json_1.default)(value);
+  static isObject = (value) => (0, is_object_1.default)(value);
+  static isEmpty = (value) => (0, is_empty_1.default)(value);
+  static capitalize = (value) => (0, capitalize_1.default)(value);
 }
 exports.default = Utilify;
-
-// CommonJS compatibility - make Utilify available directly
-module.exports = Utilify;
-module.exports.default = Utilify;
-
-// For ES modules, also export as named export
-exports.Utilify = Utilify;
 //# sourceMappingURL=index.js.map

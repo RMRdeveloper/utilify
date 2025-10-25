@@ -1,6 +1,7 @@
 declare class Utilify {
-  static isJson(value: unknown): boolean;
-  static isObject(value: unknown): boolean;
-  static isEmpty(value: unknown): boolean;
+  static isJson: (value: unknown) => value is string;
+  static isObject: (value: unknown) => value is Record<string, unknown>;
+  static isEmpty: (value: unknown) => boolean;
+  static capitalize: (value: string) => string;
 }
 export default Utilify;

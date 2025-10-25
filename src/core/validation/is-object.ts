@@ -1,5 +1,5 @@
-import UtilifyException from "./exception-handler";
-import safeRun from "./runners/safe-run";
+import UtilifyException from "../exception-handler";
+import safeRun from "../runners/safe-run";
 
 const isObject = (value: unknown): value is Record<string, unknown> => {
   return safeRun(() => {

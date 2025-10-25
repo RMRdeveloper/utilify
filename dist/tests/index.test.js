@@ -76,5 +76,15 @@ describe("Utilify", () => {
       expect(index_1.default.isEmpty(false)).toBe(false);
     });
   });
+  describe("capitalize", () => {
+    it("should capitalize the first letter of a string", () => {
+      expect(index_1.default.capitalize("hello")).toBe("Hello");
+      expect(index_1.default.capitalize("world")).toBe("World");
+      expect(index_1.default.capitalize("")).toBe("");
+    });
+    it("should return the original string if it is empty", () => {
+      expect(index_1.default.capitalize("")).toBe("");
+    });
+  });
 });
 //# sourceMappingURL=index.test.js.map
