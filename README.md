@@ -39,6 +39,15 @@ console.log(Utilify.isEmpty([])); // true
 console.log(Utilify.isEmpty({})); // true
 console.log(Utilify.isEmpty("hello")); // false
 console.log(Utilify.isEmpty([1, 2, 3])); // false
+
+// String transformations
+console.log(Utilify.capitalize("hello world")); // "Hello world"
+console.log(Utilify.toKebabCase("camelCaseString")); // "camel-case-string"
+console.log(Utilify.toSnakeCase("camelCaseString")); // "camel_case_string"
+
+// Function utilities
+const debouncedFn = Utilify.debounce(() => console.log("Called!"), 300);
+debouncedFn(); // Will log after 300ms
 ```
 
 ### CommonJS Require
