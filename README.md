@@ -33,6 +33,10 @@ console.log(Utilify.toKebabCase("camelCaseString")); // "camel-case-string"
 console.log(Utilify.toSnakeCase("camelCaseString")); // "camel_case_string"
 console.log(Utilify.trim("  hello world  ")); // "hello world"
 
+// File utilities
+console.log(Utilify.getFileExtension("document.pdf")); // "pdf"
+console.log(Utilify.getFileExtension("/path/to/image.png")); // "png"
+
 // Function utilities
 const debouncedFn = Utilify.debounce(() => console.log("Called!"), 300);
 debouncedFn(); // Will log after 300ms
@@ -94,6 +98,31 @@ Removes whitespace from both ends of a string.
 ```typescript
 console.log(Utilify.trim("  hello world  ")); // "hello world"
 console.log(Utilify.trim("\t\nhello\n\t")); // "hello"
+```
+
+### File Utilities
+
+#### `Utilify.getFileExtension(filename: string): string`
+
+Extracts the file extension from a filename or file path. Works in both Node.js and browser environments.
+
+**Parameters:**
+
+- `filename`: The filename or file path to extract the extension from
+
+**Returns:**
+
+- The file extension (without the dot) in lowercase, or empty string if no extension
+
+**Example:**
+
+```typescript
+console.log(Utilify.getFileExtension("document.pdf")); // "pdf"
+console.log(Utilify.getFileExtension("/path/to/file.txt")); // "txt"
+console.log(Utilify.getFileExtension("C:\\Users\\image.png")); // "png"
+console.log(Utilify.getFileExtension("archive.tar.gz")); // "gz"
+console.log(Utilify.getFileExtension("https://example.com/file.pdf?v=1")); // "pdf"
+console.log(Utilify.getFileExtension("README")); // ""
 ```
 
 ### Function Utilities
