@@ -6,6 +6,7 @@ declare class Utilify {
   static toKebabCase(value: string): string;
   static toSnakeCase(value: string): string;
   static debounce<T extends (...args: any[]) => any>(fn: T, delay?: number): T;
+  static flow: typeof import("./core/runners/flow").default;
 }
 
 export default Utilify;
@@ -17,3 +18,4 @@ export * from "./core/strings/capitalize";
 export * from "./core/strings/to-kebab-case";
 export * from "./core/strings/to-snake-case";
 export * from "./core/ejecution/debounce";
+export { default as flow } from "./core/runners/flow";

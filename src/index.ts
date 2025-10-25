@@ -5,6 +5,7 @@ import capitalize from "./core/strings/capitalize";
 import toKebabCase from "./core/strings/to-kebab-case";
 import toSnakeCase from "./core/strings/to-snake-case";
 import debounce from "./core/ejecution/debounce";
+import flow from "./core/runners/flow";
 
 class Utilify {
   static isJson = (value: unknown) => isJson(value);
@@ -17,6 +18,7 @@ class Utilify {
     fn: T,
     delay?: number,
   ) => debounce(fn, delay);
+  static flow = flow;
 }
 
 export default Utilify;

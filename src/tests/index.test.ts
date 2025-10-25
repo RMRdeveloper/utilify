@@ -229,4 +229,30 @@ describe("Utilify", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe("flow", () => {
+    it("should compose functions from left to right", () => {
+      const addOne = (n: number) => n + 1;
+      const double = (n: number) => n * 2;
+      const pipeline = Utilify.flow(addOne, double);
+
+      expect(pipeline(3)).toBe(8); // (3 + 1) * 2 = 8
+    });
+
+    it("should work with multiple functions", () => {
+      const trim = (s: string) => s.trim();
+      const toUpper = (s: string) => s.toUpperCase();
+      const addPrefix = (s: string) => `PREFIX_${s}`;
+
+      const processString = Utilify.flow(trim, toUpper, addPrefix);
+
+      expect(processString("  hello  ")).toBe("PREFIX_HELLO");
+    });
+
+    it("should throw error with less than 2 functions", () => {
+      expect(() => (Utilify.flow as any)((x: number) => x)).toThrow(
+        "flow requires at least 2 functions",
+      );
+    });
+  });
 });
