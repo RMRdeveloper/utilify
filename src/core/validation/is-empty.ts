@@ -1,6 +1,14 @@
 import UtilifyException from "../exception-handler";
 import safeRun from "../runners/safe-run";
 
+/**
+ * Checks if a value is empty.
+ *
+ * @param {unknown} value - The value to check
+ * @returns {boolean} - True if the value is empty, false otherwise
+ *
+ * Empty values include null, empty strings, empty arrays, and objects with no keys.
+ */
 const isEmpty = (value: unknown): boolean => {
   return safeRun(() => {
     try {
