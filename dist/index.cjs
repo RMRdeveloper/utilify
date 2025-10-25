@@ -1,3 +1,4 @@
+"use strict";
 class e extends Error {
   constructor(e, t) {
     (super(`UtilifyException in ${e}: ${t}`), (this.name = "UtilifyException"));
@@ -10,7 +11,7 @@ const t = (t, r) => {
     return (t instanceof e && console.error(t.message), r);
   }
 };
-class r {
+module.exports = class {
   static isJson = (r) =>
     ((r) =>
       t(() => {
@@ -97,5 +98,4 @@ class r {
           throw new e("debounce", "Failed to debounce function.");
         },
       ))(r, a);
-}
-export { r as default };
+};

@@ -10,4 +10,5 @@ declare class Utilify {
     delay?: number,
   ) => () => void;
 }
-export default Utilify;
+
+export { Utilify as default };

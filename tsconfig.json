@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDeclarationOnly": false,
     "declaration": true,
@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true,
     "outDir": "./dist",
     "rootDir": "./src",
