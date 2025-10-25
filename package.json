@@ -1,20 +1,37 @@
 {
   "name": "utilify",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "utility",
+    "library",
+    "javascript",
+    "typescript",
+    "utils",
+    "helpers",
+    "tools"
+  ],
+  "author": "Ronald Moreno <rmorenorodriguez16@gmail.com>",
+  "license": "MIT",
+  "description": "A utility library for JavaScript and TypeScript projects.",
+  "files": [
+    "dist/**/*"
+  ],
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.9.1",
     "husky": "^9.1.7",
+    "jest": "^30.2.0",
     "prettier": "^3.6.2",
+    "ts-jest": "^29.4.5",
     "typescript": "^5.9.3"
   }
 }
