@@ -1,4 +1,4 @@
-import flow from "../core/runners/flow";
+import flow from "../../core/runners/flow";
 
 describe("flow", () => {
   describe("basic composition", () => {
@@ -54,13 +54,13 @@ describe("flow", () => {
   describe("edge cases", () => {
     it("should throw error with less than 2 functions", () => {
       expect(() => (flow as any)((x: number) => x)).toThrow(
-        "flow requires at least 2 functions",
+        "At least 2 functions are required",
       );
     });
 
     it("should throw error with 0 functions", () => {
       expect(() => (flow as any)()).toThrow(
-        "flow requires at least 2 functions",
+        "At least 2 functions are required",
       );
     });
 
@@ -99,6 +99,36 @@ describe("flow", () => {
     });
   });
 
+  describe("input validation", () => {
+    it("should throw error for non-function arguments", () => {
+      expect(() => flow(null as any, (x: any) => x)).toThrow(
+        "Argument at index 0 is not a function",
+      );
+      expect(() => flow((x: any) => x, undefined as any)).toThrow(
+        "Argument at index 1 is not a function",
+      );
+      expect(() =>
+        flow(
+          (x: any) => x,
+          (x: any) => x,
+          "not a function" as any,
+        ),
+      ).toThrow("Argument at index 2 is not a function");
+      expect(() =>
+        flow(
+          (x: any) => x,
+          (x: any) => x,
+          123 as any,
+        ),
+      ).toThrow("Argument at index 2 is not a function");
+    });
+
+    it("should validate all arguments are functions", () => {
+      const validFn = (x: any) => x;
+      expect(() => flow(validFn, validFn, validFn)).not.toThrow();
+    });
+  });
+
   describe("error handling", () => {
     it("should throw UtilifyException on composition failure", () => {
       // This test ensures the safeRun wrapper works by creating a function that throws
@@ -114,7 +144,7 @@ describe("flow", () => {
 
     it("should validate function count before composition", () => {
       expect(() => (flow as any)((x: any) => x)).toThrow(
-        "flow requires at least 2 functions",
+        "At least 2 functions are required",
       );
     });
   });

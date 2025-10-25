@@ -109,11 +109,13 @@ describe("capitalize", () => {
   });
 
   describe("error handling", () => {
-    it("should return original value for non-string inputs", () => {
-      expect(capitalize(null as any)).toBe(null);
-      expect(capitalize(undefined as any)).toBe(undefined);
-      expect(capitalize(123 as any)).toBe(123);
-      expect(capitalize({} as any)).toEqual({});
+    it("should throw UtilifyException for non-string inputs", () => {
+      expect(() => capitalize(null as any)).toThrow("Input must be a string");
+      expect(() => capitalize(undefined as any)).toThrow(
+        "Input must be a string",
+      );
+      expect(() => capitalize(123 as any)).toThrow("Input must be a string");
+      expect(() => capitalize({} as any)).toThrow("Input must be a string");
     });
   });
 });

@@ -1,2 +1,2 @@
-declare const isJson: (value: unknown) => value is string;
+declare const isJson: (value: unknown) => boolean;
 export default isJson;

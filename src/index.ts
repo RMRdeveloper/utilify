@@ -6,7 +6,8 @@ import toKebabCase from "./core/strings/to-kebab-case";
 import toSnakeCase from "./core/strings/to-snake-case";
 import trim from "./core/strings/trim";
 import getFileExtension from "./core/files/get-file-extension";
-import debounce from "./core/ejecution/debounce";
+import getFileSize from "./core/files/get-file-size";
+import debounce from "./core/execution/debounce";
 import flow from "./core/runners/flow";
 
 class Utilify {
@@ -18,6 +19,10 @@ class Utilify {
   static toSnakeCase = (value: string) => toSnakeCase(value);
   static trim = (value: string) => trim(value);
   static getFileExtension = (filename: string) => getFileExtension(filename);
+  static getFileSize = (
+    input: import("./core/files/get-file-size").FileLike,
+    unit: import("./core/files/get-file-size").FileSizeUnit,
+  ) => getFileSize(input, unit);
   static debounce = <T extends (...args: any[]) => any>(
     fn: T,
     delay?: number,

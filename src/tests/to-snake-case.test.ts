@@ -141,11 +141,13 @@ describe("toSnakeCase", () => {
   });
 
   describe("error handling", () => {
-    it("should return empty string for non-string inputs", () => {
-      expect(toSnakeCase(null as any)).toBe("");
-      expect(toSnakeCase(undefined as any)).toBe("");
-      expect(toSnakeCase(123 as any)).toBe("");
-      expect(toSnakeCase({} as any)).toBe("");
+    it("should throw UtilifyException for non-string inputs", () => {
+      expect(() => toSnakeCase(null as any)).toThrow("Input must be a string");
+      expect(() => toSnakeCase(undefined as any)).toThrow(
+        "Input must be a string",
+      );
+      expect(() => toSnakeCase(123 as any)).toThrow("Input must be a string");
+      expect(() => toSnakeCase({} as any)).toThrow("Input must be a string");
     });
   });
 });

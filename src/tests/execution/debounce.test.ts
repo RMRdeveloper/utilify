@@ -1,4 +1,4 @@
-import debounce from "../core/ejecution/debounce";
+import debounce from "../../core/execution/debounce";
 
 describe("debounce", () => {
   beforeEach(() => {
@@ -185,6 +185,75 @@ describe("debounce", () => {
 
       jest.advanceTimersByTime(100);
 
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("input validation", () => {
+    it("should throw error for non-function input", () => {
+      expect(() => debounce(null as any, 100)).toThrow(
+        "First argument must be a function",
+      );
+      expect(() => debounce(undefined as any, 100)).toThrow(
+        "First argument must be a function",
+      );
+      expect(() => debounce("not a function" as any, 100)).toThrow(
+        "First argument must be a function",
+      );
+      expect(() => debounce(123 as any, 100)).toThrow(
+        "First argument must be a function",
+      );
+    });
+
+    it("should throw error for invalid delay values", () => {
+      const mockFn = jest.fn();
+
+      expect(() => debounce(mockFn, -1)).toThrow(
+        "Delay must be a non-negative number",
+      );
+      expect(() => debounce(mockFn, NaN)).toThrow(
+        "Delay must be a non-negative number",
+      );
+      expect(() => debounce(mockFn, Infinity)).toThrow(
+        "Delay must be a non-negative number",
+      );
+      expect(() => debounce(mockFn, "100" as any)).toThrow(
+        "Delay must be a non-negative number",
+      );
+    });
+
+    it("should accept valid delay values", () => {
+      const mockFn = jest.fn();
+
+      expect(() => debounce(mockFn, 0)).not.toThrow();
+      expect(() => debounce(mockFn, 100)).not.toThrow();
+      expect(() => debounce(mockFn, 1000)).not.toThrow();
+    });
+  });
+
+  describe("function arguments", () => {
+    it("should pass arguments to the debounced function", () => {
+      const mockFn = jest.fn();
+      const debouncedFn = debounce(mockFn, 100);
+
+      debouncedFn("arg1", "arg2", 123);
+
+      jest.advanceTimersByTime(100);
+
+      expect(mockFn).toHaveBeenCalledWith("arg1", "arg2", 123);
+    });
+
+    it("should handle multiple argument calls", () => {
+      const mockFn = jest.fn();
+      const debouncedFn = debounce(mockFn, 100);
+
+      debouncedFn("first");
+      debouncedFn("second");
+      debouncedFn("third");
+
+      jest.advanceTimersByTime(100);
+
+      expect(mockFn).toHaveBeenCalledWith("third");
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });

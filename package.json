@@ -1,6 +1,6 @@
 {
   "name": "utilifycore",
-  "version": "1.5.3",
+  "version": "1.6.1",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,7 +32,7 @@
   "description": "A utility library for JavaScript and TypeScript projects.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RMRdeveloper/utilify.git"
+    "url": "git+https://github.com/RMRdeveloper/utilify.git"
   },
   "bugs": {
     "url": "https://github.com/RMRdeveloper/utilify/issues"

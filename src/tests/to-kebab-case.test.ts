@@ -139,11 +139,13 @@ describe("toKebabCase", () => {
   });
 
   describe("error handling", () => {
-    it("should return empty string for non-string inputs", () => {
-      expect(toKebabCase(null as any)).toBe("");
-      expect(toKebabCase(undefined as any)).toBe("");
-      expect(toKebabCase(123 as any)).toBe("");
-      expect(toKebabCase({} as any)).toBe("");
+    it("should throw UtilifyException for non-string inputs", () => {
+      expect(() => toKebabCase(null as any)).toThrow("Input must be a string");
+      expect(() => toKebabCase(undefined as any)).toThrow(
+        "Input must be a string",
+      );
+      expect(() => toKebabCase(123 as any)).toThrow("Input must be a string");
+      expect(() => toKebabCase({} as any)).toThrow("Input must be a string");
     });
   });
 });

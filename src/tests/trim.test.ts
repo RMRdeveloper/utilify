@@ -88,11 +88,11 @@ describe("trim", () => {
   });
 
   describe("error handling", () => {
-    it("should return empty string for non-string values", () => {
-      expect(trim(null as any)).toBe("");
-      expect(trim(undefined as any)).toBe("");
-      expect(trim(123 as any)).toBe("");
-      expect(trim({} as any)).toBe("");
+    it("should throw UtilifyException for non-string values", () => {
+      expect(() => trim(null as any)).toThrow("Input must be a string");
+      expect(() => trim(undefined as any)).toThrow("Input must be a string");
+      expect(() => trim(123 as any)).toThrow("Input must be a string");
+      expect(() => trim({} as any)).toThrow("Input must be a string");
     });
   });
 });

@@ -1,27 +1,21 @@
 import UtilifyException from "../exception-handler";
-import safeRun from "../runners/safe-run";
 
 /**
  * Converts a string to kebab-case (lowercase with hyphens).
  *
  * @param {string} value - The string to convert to kebab-case
  * @returns {string} - The kebab-case version of the string
- * @throws {UtilifyException} - If the value can't be converted to kebab-case
+ * @throws {UtilifyException} - If the input is not a string
  */
 const toKebabCase = (value: string): string => {
-  return safeRun(() => {
-    try {
-      return value
-        .replace(/([a-z])([A-Z])/g, "$1-$2")
-        .replace(/[\s_]+/g, "-")
-        .toLowerCase();
-    } catch (error) {
-      throw new UtilifyException(
-        "toKebabCase",
-        "Failed to convert string to kebab-case.",
-      );
-    }
-  }, "");
+  if (typeof value !== "string") {
+    throw new UtilifyException("toKebabCase", "Input must be a string");
+  }
+
+  return value
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .toLowerCase();
 };
 
 export default toKebabCase;

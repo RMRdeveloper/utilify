@@ -117,8 +117,19 @@ function flow<A, B, C, D, E, F, G, H, I, J>(
 ): (input: A) => any;
 function flow(...fns: Array<(input: any) => any>): (input: any) => any {
   if (fns.length < 2) {
-    throw new UtilifyException("flow", "flow requires at least 2 functions");
+    throw new UtilifyException("flow", "At least 2 functions are required");
   }
+
+  // Validate that all arguments are functions
+  for (let i = 0; i < fns.length; i++) {
+    if (typeof fns[i] !== "function") {
+      throw new UtilifyException(
+        "flow",
+        `Argument at index ${i} is not a function`,
+      );
+    }
+  }
+
   return (input: any) => fns.reduce((acc, fn) => fn(acc), input);
 }
 

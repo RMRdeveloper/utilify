@@ -1,21 +1,18 @@
 import UtilifyException from "../exception-handler";
-import safeRun from "../runners/safe-run";
 
 /**
  * Capitalizes a string by uppercasing the first character and leaving the rest of the string unchanged.
  *
  * @param {string} value - The string to capitalize
  * @returns {string} - The capitalized string
- * @throws {UtilifyException} - If the value can't be capitalized
+ * @throws {UtilifyException} - If the input is not a string
  */
 const capitalize = (value: string): string => {
-  return safeRun(() => {
-    try {
-      return value.charAt(0).toUpperCase() + value.slice(1);
-    } catch (error) {
-      throw new UtilifyException("capitalize", "Failed to capitalize value.");
-    }
-  }, value);
+  if (typeof value !== "string") {
+    throw new UtilifyException("capitalize", "Input must be a string");
+  }
+
+  return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
 export default capitalize;
