@@ -1,6 +1,5 @@
 # UtilifyCore
 
-[![npm version](https://badge.fury.io/js/utilifycore.svg)](https://badge.fury.io/js/utilifycore)
 [![npm version](https://img.shields.io/npm/v/utilifycore.svg)](https://www.npmjs.com/package/utilifycore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -78,6 +77,15 @@ const processNumber = Utilify.flow(
   (n: number) => n / 2,
 );
 console.log(processNumber(3)); // ((3 + 1) * 2) / 2 = 4
+
+// Safe execution
+const result = Utilify.safeRun(() => JSON.parse('{"x":1}'));
+// result: { success: true, result: { x: 1 } }
+
+const asyncResult = await Utilify.safeRunAsync(async () =>
+  fetch("https://example.com"),
+);
+// asyncResult: { success: true, result: Response }
 ```
 
 ### Named Imports
@@ -96,6 +104,7 @@ import {
   debounce,
   flow,
   safeRun,
+  safeRunAsync,
   createUtils,
 } from "utilifycore";
 
@@ -434,28 +443,110 @@ Creates an extended utility object by shallow merging a base object with extensi
 
 **Example:**
 
-```typescript
+````typescript
 import { createUtils, isJson, capitalize } from "utilifycore";
+#### `Utilify.safeRun<T>(fn: () => T): SafeResult<T>`
+
+Executes a synchronous function in a safe context, catching any errors and returning a structured result. This provides better error handling compared to traditional try-catch blocks.
+
+**Type Parameters:**
+
+- `T`: The return type of the function
+
+**Parameters:**
+
+- `fn`: The function to execute safely
+
+**Returns:** `SafeResult<T>` - A structured result with success status and either result or error
+
+**Throws:** `UtilifyException` - If fn is not a function
+
+**Example:**
+
+```typescript
+// Successful execution
+const success = Utilify.safeRun(() => JSON.parse('{"valid": true}'));
+console.log(success); // { success: true, result: { valid: true } }
+
+// Error handling
+const failure = Utilify.safeRun(() => {
+  throw new Error("Something went wrong");
+});
+console.log(failure); // { success: false, error: Error("Something went wrong") }
+
+// Type-safe usage
+if (success.success) {
+  console.log(success.result); // TypeScript knows this is { valid: boolean }
+} else {
+  console.error(success.error); // TypeScript knows this is an Error
+}
+````
+
+#### `Utilify.safeRunAsync<T>(fn: () => Promise<T>): Promise<SafeResult<T>>`
+
+Executes an asynchronous function in a safe context, catching both synchronous errors and Promise rejections, returning a structured result.
+
+**Type Parameters:**
+
+- `T`: The resolved type of the Promise
+
+**Parameters:**
+
+- `fn`: The async function to execute safely
+
+**Returns:** `Promise<SafeResult<T>>` - A Promise resolving to a structured result
+
+**Throws:** `UtilifyException` - If fn is not a function
+
+**Example:**
+
+```typescript
+// Successful async execution
+const asyncSuccess = await Utilify.safeRunAsync(async () => {
+  const response = await fetch("https://api.example.com/data");
+  return response.json();
+});
+
+if (asyncSuccess.success) {
+  console.log(asyncSuccess.result); // TypeScript knows the JSON structure
+} else {
+  console.error("Request failed:", asyncSuccess.error);
+}
+
+// Error handling for network failures
+const networkFailure = await Utilify.safeRunAsync(async () => {
+  const response = await fetch("https://invalid-url.com");
+  if (!response.ok) throw new Error("Network error");
+  return response.json();
+});
+
+if (!networkFailure.success) {
+  console.log("Handled error:", networkFailure.error.message);
+}
+```
+
+## 🧪 Testing
 
 // Create extended utilities
 const extendedUtils = createUtils(
-  { isJson, capitalize },
-  {
-    customValidator: (value: any) => value !== null,
-    formatDate: (date: Date) => date.toISOString(),
-  },
-  { freezeResult: true }, // Make result immutable
+{ isJson, capitalize },
+{
+customValidator: (value: any) => value !== null,
+formatDate: (date: Date) => date.toISOString(),
+},
+{ freezeResult: true }, // Make result immutable
 );
 
 // Use extended utilities
 console.log(extendedUtils.isJson('{"test": true}')); // true
 console.log(extendedUtils.customValidator(null)); // false
 console.log(extendedUtils.formatDate(new Date())); // "2025-10-25T..."
+
 ```
 
 ## 🧪 Testing
 
-````
+```
 
 #### `Utilify.safeRun<T>(fn: () => T, defaultValue: T): T`
 
@@ -487,7 +578,7 @@ const riskyResult = Utilify.safeRun(() => {
   throw new Error("Something went wrong");
 }, "default value");
 console.log(riskyResult); // "default value"
-````
+```
 
 ## 🧪 Testing
 

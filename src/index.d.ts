@@ -16,6 +16,12 @@ declare const Utilify: {
     delay?: number,
   ) => T;
   readonly flow: typeof import("./core/runners/flow").default;
+  readonly safeRun: <T>(
+    fn: () => T,
+  ) => import("./core/runners/safe-run").SafeResult<T>;
+  readonly safeRunAsync: <T>(
+    fn: () => Promise<T>,
+  ) => Promise<import("./core/runners/safe-run").SafeResult<T>>;
 };
 
 export default Utilify;
@@ -34,4 +40,9 @@ export {
 } from "./core/files/get-file-size";
 export * from "./core/execution/debounce";
 export { default as flow } from "./core/runners/flow";
+export {
+  safeRun,
+  safeRunAsync,
+  type SafeResult,
+} from "./core/runners/safe-run";
 export { default as createUtils } from "./createUtils";
