@@ -1,4 +1,4 @@
-# Utilify
+# UtilifyCore
 
 A lightweight, type-safe utility library for JavaScript and TypeScript projects that provides essential validation and checking functions.
 
@@ -13,7 +13,7 @@ A lightweight, type-safe utility library for JavaScript and TypeScript projects 
 ## Installation
 
 ```bash
-npm install utilify
+npm install utilifycore
 ```
 
 ## Usage
