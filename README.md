@@ -31,6 +31,7 @@ console.log(Utilify.isEmpty(null)); // true
 console.log(Utilify.capitalize("hello world")); // "Hello world"
 console.log(Utilify.toKebabCase("camelCaseString")); // "camel-case-string"
 console.log(Utilify.toSnakeCase("camelCaseString")); // "camel_case_string"
+console.log(Utilify.trim("  hello world  ")); // "hello world"
 
 // Function utilities
 const debouncedFn = Utilify.debounce(() => console.log("Called!"), 300);
@@ -83,6 +84,17 @@ Converts a string to kebab-case.
 #### `Utilify.toSnakeCase(value: string): string`
 
 Converts a string to snake_case.
+
+#### `Utilify.trim(value: string): string`
+
+Removes whitespace from both ends of a string.
+
+**Example:**
+
+```typescript
+console.log(Utilify.trim("  hello world  ")); // "hello world"
+console.log(Utilify.trim("\t\nhello\n\t")); // "hello"
+```
 
 ### Function Utilities
 

@@ -175,6 +175,34 @@ describe("Utilify", () => {
     });
   });
 
+  describe("trim", () => {
+    it("should remove leading and trailing whitespace", () => {
+      expect(Utilify.trim("  hello  ")).toBe("hello");
+      expect(Utilify.trim("   world   ")).toBe("world");
+    });
+
+    it("should handle strings without whitespace", () => {
+      expect(Utilify.trim("hello")).toBe("hello");
+      expect(Utilify.trim("world")).toBe("world");
+    });
+
+    it("should remove tabs and newlines", () => {
+      expect(Utilify.trim("\thello\t")).toBe("hello");
+      expect(Utilify.trim("\nhello\n")).toBe("hello");
+      expect(Utilify.trim(" \t\nhello\n\t ")).toBe("hello");
+    });
+
+    it("should handle empty strings", () => {
+      expect(Utilify.trim("")).toBe("");
+      expect(Utilify.trim("   ")).toBe("");
+    });
+
+    it("should preserve internal whitespace", () => {
+      expect(Utilify.trim("  hello world  ")).toBe("hello world");
+      expect(Utilify.trim("  hello  world  ")).toBe("hello  world");
+    });
+  });
+
   describe("debounce", () => {
     beforeEach(() => {
       jest.useFakeTimers();

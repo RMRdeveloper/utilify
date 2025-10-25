@@ -6,6 +6,7 @@ declare class Utilify {
     static capitalize: (value: string) => string;
     static toKebabCase: (value: string) => string;
     static toSnakeCase: (value: string) => string;
+    static trim: (value: string) => string;
     static debounce: <T extends (...args: any[]) => any>(fn: T, delay?: number) => () => void;
     static flow: typeof flow;
 }
