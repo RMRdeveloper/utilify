@@ -31,7 +31,8 @@
   "license": "MIT",
   "description": "A utility library for JavaScript and TypeScript projects.",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "!dist/tests/**/*"
   ],
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",

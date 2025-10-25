@@ -1,6 +1,5 @@
 const typescript = require("@rollup/plugin-typescript");
 const terser = require("@rollup/plugin-terser");
-const dts = require("rollup-plugin-dts");
 
 module.exports = [
   {
@@ -20,15 +19,10 @@ module.exports = [
     plugins: [
       typescript({
         tsconfig: "./tsconfig.json",
-        declaration: false,
+        declaration: true,
         declarationMap: false,
       }),
       terser(),
     ],
-  },
-  {
-    input: "dist/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts.default()],
   },
 ];
