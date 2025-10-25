@@ -17,6 +17,7 @@ A lightweight, type-safe utility library for JavaScript and TypeScript projects 
 - **🚫 Zero Dependencies**: Pure JavaScript/TypeScript implementation
 - **🌍 Cross-Environment**: Works in Node.js, browsers, and other JavaScript environments
 - **🛡️ Error Safety**: Comprehensive input validation with descriptive error messages
+- **🔧 Extensible Architecture**: Built with SOLID principles for easy extension and customization
 
 ## 📦 Installation
 
@@ -94,12 +95,19 @@ import {
   debounce,
   flow,
   safeRun,
+  createUtils,
 } from "utilifycore";
 
 // Use individual functions directly
 console.log(isJson('{"valid": true}')); // true
 console.log(capitalize("hello")); // "Hello"
 console.log(toKebabCase("PascalCase")); // "pascal-case"
+
+// Extend utilities with custom functions
+const extendedUtils = createUtils(
+  { isJson, capitalize },
+  { customValidator: (value: any) => value !== null },
+);
 ```
 
 ### CommonJS Require
@@ -406,6 +414,48 @@ const transform = Utilify.flow(
 console.log(transform("hello world")); // "long"
 ```
 
+#### `Utilify.createUtils<TBase extends Record<string, any>, TExt extends Record<string, any>>(base: TBase, ext: Partial<TExt>, options?: { freezeBase?: boolean; freezeResult?: boolean }): TBase & TExt`
+
+Creates an extended utility object by shallow merging a base object with extensions. Follows SOLID principles for extensible architecture.
+
+**Type Parameters:**
+
+- `TBase`: The base object type
+- `TExt`: The extension object type
+
+**Parameters:**
+
+- `base`: The base object to extend
+- `ext`: Partial extensions to merge into the base
+- `options`: Optional configuration for freezing objects
+
+**Returns:** `TBase & TExt` - The merged object with base and extensions
+
+**Example:**
+
+```typescript
+import { createUtils, isJson, capitalize } from "utilifycore";
+
+// Create extended utilities
+const extendedUtils = createUtils(
+  { isJson, capitalize },
+  {
+    customValidator: (value: any) => value !== null,
+    formatDate: (date: Date) => date.toISOString(),
+  },
+  { freezeResult: true }, // Make result immutable
+);
+
+// Use extended utilities
+console.log(extendedUtils.isJson('{"test": true}')); // true
+console.log(extendedUtils.customValidator(null)); // false
+console.log(extendedUtils.formatDate(new Date())); // "2025-10-25T..."
+```
+
+## 🧪 Testing
+
+````
+
 #### `Utilify.safeRun<T>(fn: () => T, defaultValue: T): T`
 
 Runs a given function in a safe execution context, catching any errors and returning a default value instead. If the error is an instance of UtilifyException, it logs an error message to the console.
@@ -436,7 +486,7 @@ const riskyResult = Utilify.safeRun(() => {
   throw new Error("Something went wrong");
 }, "default value");
 console.log(riskyResult); // "default value"
-```
+````
 
 ## 🧪 Testing
 

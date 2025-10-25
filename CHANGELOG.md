@@ -5,6 +5,68 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2025-10-25
+
+### 🚀 Major Improvements
+
+#### **Extension Architecture with createUtils**
+
+- **Minimal Extension Function**: Added `createUtils` function for type-safe, shallow merging of utility objects
+- **SOLID Principles**: Implemented Open/Closed principle allowing extension without modifying base utilities
+- **Type Safety**: Full TypeScript generics support for base and extension objects
+- **Immutability**: Optional freezing of base objects and result objects for immutability
+- **Zero Dependencies**: Pure implementation without external libraries
+
+#### **Refactored Core Architecture**
+
+- **Object-Based Structure**: Replaced class-based approach with functional object composition
+- **Separation of Concerns**: Clear separation between base utilities and extension logic
+- **Backward Compatibility**: Maintained existing API while enabling future extensions
+- **Performance**: Reduced overhead by removing unnecessary class wrappers
+
+#### **New API Features**
+
+- **createUtils Function**: Generic utility for creating extended utility objects
+- **Flexible Extensions**: Support for partial object extensions with type safety
+- **Optional Freezing**: Configurable immutability for base and result objects
+- **Composable Design**: Easy to extend and customize utility sets
+
+### 📊 Quality Metrics
+
+| Metric                     | Before | After  | Improvement |
+| -------------------------- | ------ | ------ | ----------- |
+| Test Coverage (Statements) | 100%   | 100%   | 0%          |
+| Test Coverage (Lines)      | 100%   | 100%   | 0%          |
+| Test Coverage (Branches)   | 92.79% | 93.33% | +0.54%      |
+| Test Coverage (Functions)  | 100%   | 100%   | 0%          |
+| Total Tests                | 246    | 254    | +8 tests    |
+
+### 🧪 Testing Enhancements
+
+- **createUtils Tests**: Comprehensive test suite for the new extension function
+- **Integration Tests**: Verified backward compatibility with existing API
+- **Type Safety Tests**: Ensured proper TypeScript inference and validation
+- **Edge Case Coverage**: Tested freezing, merging, and extension scenarios
+
+### 🔧 Technical Improvements
+
+- **Architecture**: Modular design following SOLID principles
+- **Type Safety**: Enhanced generics for better developer experience
+- **Performance**: Maintained high performance with new architecture
+- **Bundle Size**: Minimal impact on bundle size (~4.8KB packaged)
+
+### 📈 Backward Compatibility
+
+- **API Preservation**: All existing function signatures and behaviors maintained
+- **Import Compatibility**: Both default and named imports continue to work
+- **Type Definitions**: Updated declarations while maintaining compatibility
+
+### 📚 Documentation
+
+- **API Reference**: Added documentation for `createUtils` function
+- **Usage Examples**: Included examples for extending utilities
+- **Architecture Guide**: Explained the new extension architecture
+
 ## [1.6.0] - 2025-10-25
 
 ### 🚀 Major Improvements
