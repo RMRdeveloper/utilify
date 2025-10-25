@@ -623,9 +623,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Ronald Moreno**
 
-- Email: ronaldmorenorodriguez1990@gmail.com
+- Email: rmorenorodriguez16@gmail.com
 - GitHub: [@RMRdeveloper](https://github.com/RMRdeveloper)
-- LinkedIn: [Ronald Moreno](https://www.linkedin.com/in/ronald-moreno-rodriguez/)
+- LinkedIn: [Ronald Moreno](https://www.linkedin.com/in/rmrdeveloper/)
 
 ## 🙏 Acknowledgments
 
