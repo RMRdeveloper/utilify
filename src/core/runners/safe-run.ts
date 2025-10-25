@@ -1,4 +1,4 @@
-import UtilifyException from "@/core/exception-handler";
+import UtilifyException from "../exception-handler";
 
 const safeRun = <T>(fn: () => T, defaultValue: T): T => {
   try {

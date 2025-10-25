@@ -1,5 +1,5 @@
-import UtilifyException from "@/core/exception-handler";
-import safeRun from "@/core/runners/safe-run";
+import UtilifyException from "./exception-handler";
+import safeRun from "./runners/safe-run";
 
 const isEmpty = (value: unknown): boolean => {
   return safeRun(() => {

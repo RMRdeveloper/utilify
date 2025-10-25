@@ -5,10 +5,8 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-const exception_handler_1 = __importDefault(
-  require("@/core/exception-handler"),
-);
-const safe_run_1 = __importDefault(require("@/core/runners/safe-run"));
+const exception_handler_1 = __importDefault(require("./exception-handler"));
+const safe_run_1 = __importDefault(require("./runners/safe-run"));
 const isEmpty = (value) => {
   return (0, safe_run_1.default)(() => {
     try {

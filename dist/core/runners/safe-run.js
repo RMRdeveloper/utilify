@@ -5,9 +5,7 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-const exception_handler_1 = __importDefault(
-  require("@/core/exception-handler"),
-);
+const exception_handler_1 = __importDefault(require("../exception-handler"));
 const safeRun = (fn, defaultValue) => {
   try {
     return fn();

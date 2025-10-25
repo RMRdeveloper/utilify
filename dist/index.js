@@ -20,4 +20,11 @@ class Utilify {
   }
 }
 exports.default = Utilify;
+
+// CommonJS compatibility - make Utilify available directly
+module.exports = Utilify;
+module.exports.default = Utilify;
+
+// For ES modules, also export as named export
+exports.Utilify = Utilify;
 //# sourceMappingURL=index.js.map

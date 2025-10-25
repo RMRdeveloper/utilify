@@ -18,8 +18,10 @@ npm install utilifycore
 
 ## Usage
 
+### ES6 Import (Recommended)
+
 ```typescript
-import Utilify from "utilify";
+import Utilify from "utilifycore";
 
 // Check if a string is valid JSON
 console.log(Utilify.isJson('{"name": "John"}')); // true
@@ -37,6 +39,26 @@ console.log(Utilify.isEmpty([])); // true
 console.log(Utilify.isEmpty({})); // true
 console.log(Utilify.isEmpty("hello")); // false
 console.log(Utilify.isEmpty([1, 2, 3])); // false
+```
+
+### CommonJS Require
+
+```javascript
+const Utilify = require("utilifycore");
+
+// Same API as ES6 imports
+console.log(Utilify.isJson('{"name": "John"}')); // true
+console.log(Utilify.isObject({})); // true
+console.log(Utilify.isEmpty(null)); // true
+```
+
+### Dynamic Import
+
+```javascript
+// ES6 dynamic import
+import("utilifycore").then((Utilify) => {
+  console.log(Utilify.default.isJson('{"test": true}')); // true
+});
 ```
 
 ## API Reference
