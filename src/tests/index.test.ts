@@ -91,5 +91,70 @@ describe("Utilify", () => {
     it("should return the original string if it is empty", () => {
       expect(Utilify.capitalize("")).toBe("");
     });
+
+    it("should handle strings that are already capitalized", () => {
+      expect(Utilify.capitalize("Hello")).toBe("Hello");
+      expect(Utilify.capitalize("WORLD")).toBe("WORLD");
+    });
+
+    it("should handle strings with numbers and special characters", () => {
+      expect(Utilify.capitalize("123test")).toBe("123test");
+      expect(Utilify.capitalize("@hello")).toBe("@hello");
+    });
+  });
+
+  describe("debounce", () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    });
+
+    it("should debounce a function call", () => {
+      const mockFn = jest.fn();
+      const debouncedFn = Utilify.debounce(mockFn, 100);
+
+      debouncedFn();
+      debouncedFn();
+      debouncedFn();
+
+      expect(mockFn).not.toHaveBeenCalled();
+
+      jest.advanceTimersByTime(100);
+
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
+
+    it("should use default delay of 250ms", () => {
+      const mockFn = jest.fn();
+      const debouncedFn = Utilify.debounce(mockFn);
+
+      debouncedFn();
+
+      jest.advanceTimersByTime(249);
+      expect(mockFn).not.toHaveBeenCalled();
+
+      jest.advanceTimersByTime(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
+
+    it("should reset the timer on subsequent calls", () => {
+      const mockFn = jest.fn();
+      const debouncedFn = Utilify.debounce(mockFn, 100);
+
+      debouncedFn();
+      jest.advanceTimersByTime(50);
+
+      debouncedFn();
+      jest.advanceTimersByTime(50);
+
+      debouncedFn();
+      jest.advanceTimersByTime(100);
+
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
   });
 });
