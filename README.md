@@ -4,6 +4,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Test Coverage](https://img.shields.io/badge/coverage-100%25_statements-4CAF50)](https://github.com/RMRdeveloper/utilify)
+[![Test Coverage](https://img.shields.io/badge/coverage-100%25_lines-4CAF50)](https://github.com/RMRdeveloper/utilify)
+[![Test Coverage](https://img.shields.io/badge/coverage-100%25_functions-4CAF50)](https://github.com/RMRdeveloper/utilify)
 
 A lightweight, type-safe utility library for JavaScript and TypeScript projects that provides essential validation, string transformation, file operations, and function utilities with **100% test coverage**.
 
@@ -12,7 +14,7 @@ A lightweight, type-safe utility library for JavaScript and TypeScript projects 
 - **🏆 100% Test Coverage**: Complete statement, line, and function coverage
 - **🔒 Type-safe**: Written in TypeScript with full type definitions and runtime validation
 - **⚡ High Performance**: Optimized for speed with minimal overhead
-- **📦 Lightweight**: Small bundle size (~4.8KB packaged, 16.3KB unpacked)
+- **📦 Lightweight**: Small bundle size (~9.0KB packaged, 32.1KB unpacked)
 - **🔄 ESM & CommonJS**: Supports both modern and legacy module systems
 - **🚫 Zero Dependencies**: Pure JavaScript/TypeScript implementation
 - **🌍 Cross-Environment**: Works in Node.js, browsers, and other JavaScript environments
@@ -614,7 +616,7 @@ The project includes comprehensive tests covering:
 Current test coverage metrics:
 
 - **Statements**: 100%
-- **Branches**: 92.79%
+- **Branches**: 92.96%
 - **Functions**: 100%
 - **Lines**: 100%
 

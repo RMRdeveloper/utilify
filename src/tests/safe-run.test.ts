@@ -1,4 +1,9 @@
-import { safeRun, safeRunAsync, SafeResult } from "../core/runners/safe-run";
+import UtilifyException from "../core/exception-handler";
+import legacySafeRun, {
+  safeRun,
+  safeRunAsync,
+  SafeResult,
+} from "../core/runners/safe-run";
 
 describe("safeRun", () => {
   it("should return success result when function executes successfully", () => {
@@ -243,3 +248,120 @@ describe("TypeScript type inference", () => {
 function expectType<T>(value: T): void {
   // This function is only used for TypeScript type checking
 }
+
+describe("legacySafeRun", () => {
+  it("should return the result when function executes successfully", () => {
+    const result = legacySafeRun(() => "success", "default");
+    expect(result).toBe("success");
+  });
+
+  it("should return default value when function throws", () => {
+    const result = legacySafeRun(() => {
+      throw new Error("Test error");
+    }, "default");
+    expect(result).toBe("default");
+  });
+
+  it("should return default value when function throws UtilifyException", () => {
+    const consoleSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    const result = legacySafeRun(() => {
+      throw new UtilifyException("test", "UtilifyException");
+    }, "default");
+    expect(result).toBe("default");
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "UtilifyException in test: UtilifyException",
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it("should handle different return types correctly", () => {
+    // String
+    const stringResult = legacySafeRun(() => "hello", "default");
+    expect(stringResult).toBe("hello");
+
+    // Number
+    const numberResult = legacySafeRun(() => 42, 0);
+    expect(numberResult).toBe(42);
+
+    // Object
+    const objectResult = legacySafeRun(() => ({ key: "value" }), {
+      key: "default",
+    });
+    expect(objectResult).toEqual({ key: "value" });
+
+    // Array
+    const arrayResult = legacySafeRun(() => [1, 2, 3], []);
+    expect(arrayResult).toEqual([1, 2, 3]);
+
+    // Boolean
+    const boolResult = legacySafeRun(() => true, false);
+    expect(boolResult).toBe(true);
+
+    // Null
+    const nullResult = legacySafeRun(() => null, "default");
+    expect(nullResult).toBe(null);
+
+    // Undefined
+    const undefinedResult = legacySafeRun(() => undefined, "default");
+    expect(undefinedResult).toBe(undefined);
+  });
+
+  it("should throw UtilifyException when fn is not a function", () => {
+    expect(() => legacySafeRun("not a function" as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+    expect(() => legacySafeRun(null as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+    expect(() => legacySafeRun(undefined as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+    expect(() => legacySafeRun(123 as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+    expect(() => legacySafeRun({} as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+    expect(() => legacySafeRun([] as any, "default")).toThrow(
+      "First argument must be a function",
+    );
+  });
+
+  it("should handle different types of thrown values", () => {
+    // String error
+    const stringError = legacySafeRun(() => {
+      throw "string error";
+    }, "default");
+    expect(stringError).toBe("default");
+
+    // Number error
+    const numberError = legacySafeRun(() => {
+      throw 404;
+    }, "default");
+    expect(numberError).toBe("default");
+
+    // Object error
+    const objectError = legacySafeRun(() => {
+      throw { code: 500 };
+    }, "default");
+    expect(objectError).toBe("default");
+
+    // Custom Error
+    const customError = legacySafeRun(() => {
+      throw new TypeError("Type error");
+    }, "default");
+    expect(customError).toBe("default");
+  });
+
+  it("should handle functions with side effects", () => {
+    let counter = 0;
+    const sideEffectResult = legacySafeRun(() => {
+      counter++;
+      return counter;
+    }, 0);
+    expect(sideEffectResult).toBe(1);
+    expect(counter).toBe(1);
+  });
+});
