@@ -1,7 +1,7 @@
-interface Utilify {
-  isJson(value: unknown): boolean;
-  isObject(value: unknown): boolean;
-  isEmpty(value: unknown): boolean;
+declare class Utilify {
+  static isJson(value: unknown): boolean;
+  static isObject(value: unknown): boolean;
+  static isEmpty(value: unknown): boolean;
 }
 
 export default Utilify;
