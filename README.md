@@ -433,27 +433,6 @@ const transform = Utilify.flow(
 console.log(transform("hello world")); // "long"
 ```
 
-#### `Utilify.createUtils<TBase extends Record<string, any>, TExt extends Record<string, any>>(base: TBase, ext: Partial<TExt>, options?: { freezeBase?: boolean; freezeResult?: boolean }): TBase & TExt`
-
-Creates an extended utility object by shallow merging a base object with extensions. Follows SOLID principles for extensible architecture.
-
-**Type Parameters:**
-
-- `TBase`: The base object type
-- `TExt`: The extension object type
-
-**Parameters:**
-
-- `base`: The base object to extend
-- `ext`: Partial extensions to merge into the base
-- `options`: Optional configuration for freezing objects
-
-**Returns:** `TBase & TExt` - The merged object with base and extensions
-
-**Example:**
-
-````typescript
-import { createUtils, isJson, capitalize } from "utilifycore";
 #### `Utilify.safeRun<T>(fn: () => T): SafeResult<T>`
 
 Executes a synchronous function in a safe context, catching any errors and returning a structured result. This provides better error handling compared to traditional try-catch blocks.
@@ -489,7 +468,7 @@ if (success.success) {
 } else {
   console.error(success.error); // TypeScript knows this is an Error
 }
-````
+```
 
 #### `Utilify.safeRunAsync<T>(fn: () => Promise<T>): Promise<SafeResult<T>>`
 
