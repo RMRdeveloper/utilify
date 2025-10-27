@@ -1,6 +1,6 @@
 {
   "name": "utilifycore",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rimraf dist && rollup -c",
     "prepare": "husky",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -50,6 +50,7 @@
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "prettier": "^3.6.2",
+    "rimraf": "^5.0.10",
     "rollup": "^4.52.5",
     "rollup-plugin-dts": "^6.2.3",
     "ts-jest": "^29.4.5",
