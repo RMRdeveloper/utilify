@@ -107,6 +107,7 @@ import {
   flow,
   safeRun,
   safeRunAsync,
+  paginateArray,
   createUtils,
 } from "utilifycore";
 
@@ -114,6 +115,12 @@ import {
 console.log(isJson('{"valid": true}')); // true
 console.log(capitalize("hello")); // "Hello"
 console.log(toKebabCase("PascalCase")); // "pascal-case"
+
+// Array pagination
+const items = Array.from({ length: 25 }, (_, i) => ({ id: i + 1 }));
+const paginated = paginateArray(items, { page: 2, pageSize: 5 });
+console.log(paginated.currentPage); // 2
+console.log(paginated.data.length); // 5
 
 // Extend utilities with custom functions
 const extendedUtils = createUtils(
@@ -529,57 +536,95 @@ if (!networkFailure.success) {
 
 ## 🧪 Testing
 
+#### `Utilify.paginateArray<T>(items: T[], options?: { page?: number; pageSize?: number; zeroBased?: boolean }): Paginated<T>`
+
+Paginates an array of items with configurable options, supporting both 1-based and zero-based pagination.
+
+**Type Parameters:**
+
+- `T`: The type of items in the array
+
+**Parameters:**
+
+- `items`: The array of items to paginate
+- `options` (optional): Configuration object
+  - `page`: The page number to retrieve (default: 1 for 1-based, 0 for zero-based)
+  - `pageSize`: Number of items per page (default: 10)
+  - `zeroBased`: Whether to use zero-based pagination (default: false)
+
+**Returns:** `Paginated<T>` - An object containing:
+
+- `data`: Array of items for the current page
+- `currentPage`: The current page number
+- `totalPages`: Total number of pages
+- `totalItems`: Total number of items
+- `pageSize`: Number of items per page
+- `hasNextPage`: Whether there is a next page
+- `hasPreviousPage`: Whether there is a previous page
+
+**Example:**
+
+```typescript
+const items = Array.from({ length: 25 }, (_, i) => ({
+  id: i + 1,
+  name: `Item ${i + 1}`,
+}));
+
+// Basic pagination (1-based, default pageSize: 10)
+const result = Utilify.paginateArray(items);
+console.log(result.currentPage); // 1
+console.log(result.totalPages); // 3
+console.log(result.data.length); // 10
+
+// Custom page and pageSize
+const page2 = Utilify.paginateArray(items, { page: 2, pageSize: 5 });
+console.log(page2.currentPage); // 2
+console.log(page2.data.length); // 5
+
+// Zero-based pagination
+const zeroBased = Utilify.paginateArray(items, { page: 0, zeroBased: true });
+console.log(zeroBased.currentPage); // 0
+console.log(zeroBased.hasPreviousPage); // false
+```
+
+#### `Utilify.createUtils<TBase extends Record<string, any>, TExt extends Record<string, any>>(base: TBase, ext: Partial<TExt>, options?: { freezeBase?: boolean; freezeResult?: boolean }): TBase & TExt`
+
+Creates an extended utility object by shallow merging a base object with extensions. Follows SOLID principles for extensible architecture.
+
+**Type Parameters:**
+
+- `TBase`: The base object type
+- `TExt`: The extension object type
+
+**Parameters:**
+
+- `base`: The base object to extend
+- `ext`: Partial extensions to merge into the base
+- `options`: Optional configuration for freezing objects
+  - `freezeBase`: Whether to freeze the base object (default: false)
+  - `freezeResult`: Whether to freeze the result object (default: false)
+
+**Returns:** `TBase & TExt` - The merged object with base and extensions
+
+**Example:**
+
+```typescript
+import { createUtils, isJson, capitalize } from "utilifycore";
+
 // Create extended utilities
 const extendedUtils = createUtils(
-{ isJson, capitalize },
-{
-customValidator: (value: any) => value !== null,
-formatDate: (date: Date) => date.toISOString(),
-},
-{ freezeResult: true }, // Make result immutable
+  { isJson, capitalize },
+  {
+    customValidator: (value: any) => value !== null,
+    formatDate: (date: Date) => date.toISOString(),
+  },
+  { freezeResult: true }, // Make result immutable
 );
 
 // Use extended utilities
 console.log(extendedUtils.isJson('{"test": true}')); // true
 console.log(extendedUtils.customValidator(null)); // false
 console.log(extendedUtils.formatDate(new Date())); // "2025-10-25T..."
-
-```
-
-## 🧪 Testing
-
-```
-
-#### `Utilify.safeRun<T>(fn: () => T, defaultValue: T): T`
-
-Runs a given function in a safe execution context, catching any errors and returning a default value instead. If the error is an instance of UtilifyException, it logs an error message to the console.
-
-**Type Parameters:**
-
-- `T`: The return type of the function
-
-**Parameters:**
-
-- `fn`: The function to run in a safe execution context
-- `defaultValue`: The default value to return if an error occurs
-
-**Returns:** `T` - The result of the function, or the default value if an error occurs
-
-**Throws:** `UtilifyException` - If fn is not a function
-
-**Example:**
-
-```typescript
-const result = Utilify.safeRun(() => {
-  // Some risky operation
-  return JSON.parse('{"valid": true}');
-}, {});
-
-// With error handling
-const riskyResult = Utilify.safeRun(() => {
-  throw new Error("Something went wrong");
-}, "default value");
-console.log(riskyResult); // "default value"
 ```
 
 ## 🧪 Testing

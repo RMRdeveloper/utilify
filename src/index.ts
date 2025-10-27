@@ -9,6 +9,7 @@ import getFileExtension from "./core/files/get-file-extension";
 import getFileSize from "./core/files/get-file-size";
 import debounce from "./core/execution/debounce";
 import flow from "./core/runners/flow";
+import paginateArray from "./core/arrays/paginate-array";
 import { safeRun, safeRunAsync } from "./core/runners/safe-run";
 import createUtils from "./createUtils";
 
@@ -26,6 +27,7 @@ const baseUtils = {
   flow,
   safeRun,
   safeRunAsync,
+  paginateArray,
 };
 
 const Utilify = createUtils(baseUtils, {}, { freezeResult: true });

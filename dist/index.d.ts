@@ -1,4 +1,5 @@
 import flow from "./core/runners/flow";
+import paginateArray from "./core/arrays/paginate-array";
 import { safeRun, safeRunAsync } from "./core/runners/safe-run";
 declare const Utilify: {
     isJson: (value: unknown) => boolean;
@@ -14,5 +15,6 @@ declare const Utilify: {
     flow: typeof flow;
     safeRun: typeof safeRun;
     safeRunAsync: typeof safeRunAsync;
+    paginateArray: typeof paginateArray;
 } & Record<string, any>;
 export default Utilify;

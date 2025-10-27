@@ -22,6 +22,14 @@ declare const Utilify: {
   readonly safeRunAsync: <T>(
     fn: () => Promise<T>,
   ) => Promise<import("./core/runners/safe-run").SafeResult<T>>;
+  readonly paginateArray: <T>(
+    items: T[],
+    opts?: {
+      page?: number;
+      pageSize?: number;
+      zeroBased?: boolean;
+    },
+  ) => import("./core/arrays/paginate-array").Paginated<T>;
 };
 
 export default Utilify;
@@ -46,3 +54,4 @@ export {
   type SafeResult,
 } from "./core/runners/safe-run";
 export { default as createUtils } from "./createUtils";
+export { default as paginateArray } from "./core/arrays/paginate-array";
