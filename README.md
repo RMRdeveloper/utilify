@@ -1,6 +1,6 @@
 # UtilifyCore
 
-[![npm version](https://img.shields.io/npm/v/utilifycore.svg)](https://www.npmjs.com/package/utilifycore)
+[![npm version](https://img.shields.io/npm/v/utilifycore/1.10.4.svg)](https://www.npmjs.com/package/utilifycore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Test Coverage](https://img.shields.io/badge/coverage-100%25_statements-4CAF50)](https://github.com/RMRdeveloper/utilify)
