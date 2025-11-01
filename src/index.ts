@@ -5,6 +5,7 @@ import capitalize from "./core/strings/capitalize";
 import toKebabCase from "./core/strings/to-kebab-case";
 import toSnakeCase from "./core/strings/to-snake-case";
 import trim from "./core/strings/trim";
+import removeAccents from "./core/strings/remove-accents";
 import getFileExtension from "./core/files/get-file-extension";
 import getFileSize from "./core/files/get-file-size";
 import debounce from "./core/execution/debounce";
@@ -21,6 +22,7 @@ const baseUtils = {
   toKebabCase,
   toSnakeCase,
   trim,
+  removeAccents,
   getFileExtension,
   getFileSize,
   debounce,

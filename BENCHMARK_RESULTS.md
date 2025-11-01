@@ -4,25 +4,26 @@
 
 | Utility                 | Lodash (ops/sec) | Ramda (ops/sec) | UtilifyCore (ops/sec) |
 | ----------------------- | ---------------- | --------------- | --------------------- |
-| validation/is-empty     | 1,079,516        | 110,435         | 15,516,865            |
-| validation/is-json      | —                | —               | 64,042                |
-| validation/is-object    | 21,780,183       | 927,625         | 23,421,785            |
-| string/capitalize       | 3,132,752        | —               | 5,757,178             |
-| string/trim             | 2,110,139        | 1,219,481       | 11,125,013            |
-| string/to-kebab-case    | 356,027          | 286,981         | 456,945               |
-| string/to-snake-case    | 502,739          | 285,128         | 665,895               |
+| validation/is-empty     | 1,456,755        | 131,240         | 15,990,320            |
+| validation/is-json      | —                | —               | 60,684                |
+| validation/is-object    | 20,942,535       | 889,130         | 23,059,301            |
+| string/capitalize       | 2,287,187        | —               | 5,388,119             |
+| string/trim             | 2,061,515        | 1,164,910       | 10,949,719            |
+| string/to-kebab-case    | 328,432          | 189,756         | 449,931               |
+| string/to-snake-case    | 349,352          | 201,256         | 455,748               |
+| string/remove-accents   | 322,848          | —               | 502,239               |
 | array/paginate          | —                | —               | —                     |
 | file/get-file-extension | —                | —               | —                     |
 | file/get-file-size      | —                | —               | —                     |
 | execution/debounce      | —                | —               | —                     |
 | runner/flow             | —                | —               | —                     |
-| runner/safe-run         | —                | —               | 202,955,815           |
-| runner/safe-run-async   | —                | —               | 2,240,795             |
+| runner/safe-run         | —                | —               | 135,160,765           |
+| runner/safe-run-async   | —                | —               | 1,848,563             |
 
 ## Summary
 
 - 🥇 Fastest library: UtilifyCore
-- 🧩 Fastest function: runner/safe-run (202,955,815 ops/sec)
+- 🧩 Fastest function: runner/safe-run (135,160,765 ops/sec)
 - Note: Performance comparison between Utilify, Lodash and Ramda on common operations.
 
-_Generated on: 2025-10-28T23:41:44.955Z_
+_Generated on: 2025-11-01T02:52:45.951Z_

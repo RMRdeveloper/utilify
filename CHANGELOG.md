@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2025-11-01
+
+### Added
+
+- `removeAccents` function for removing diacritical marks from strings
+  - Uses Unicode normalization (NFD) to decompose accented characters
+  - Removes combining diacritical marks (U+0300-U+036F)
+  - Handles all European accents, special characters, and international scripts
+  - Preserves non-Latin scripts and emoji unchanged
+  - Full TypeScript support with proper input validation
+  - Comprehensive test coverage including edge cases and error handling
+
+### Changed
+
+- Updated test coverage to include `removeAccents` functionality (100% coverage maintained)
+- Enhanced type definitions in `index.d.ts` to include new `removeAccents` export
+
 ## [1.10.7] - 2025-11-01
 
 ### Changed

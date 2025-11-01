@@ -51,6 +51,7 @@ console.log(Utilify.capitalize("hello world")); // "Hello world"
 console.log(Utilify.toKebabCase("camelCaseString")); // "camel-case-string"
 console.log(Utilify.toSnakeCase("camelCaseString")); // "camel_case_string"
 console.log(Utilify.trim("  hello world  ")); // "hello world"
+console.log(Utilify.removeAccents("café résumé")); // "cafe resume"
 
 // File utilities
 console.log(Utilify.getFileExtension("document.pdf")); // "pdf"
@@ -89,6 +90,7 @@ import {
   toKebabCase,
   toSnakeCase,
   trim,
+  removeAccents,
   getFileExtension,
   getFileSize,
   debounce,
@@ -103,6 +105,7 @@ import {
 console.log(isJson('{"valid": true}')); // true
 console.log(capitalize("hello")); // "Hello"
 console.log(toKebabCase("PascalCase")); // "pascal-case"
+console.log(removeAccents("café")); // "cafe"
 
 // Array pagination
 const items = Array.from({ length: 25 }, (_, i) => ({ id: i + 1 }));
@@ -287,6 +290,28 @@ Removes whitespace from both ends of a string.
 console.log(Utilify.trim("  hello world  ")); // "hello world"
 console.log(Utilify.trim("\t\nhello\n\t")); // "hello"
 console.log(Utilify.trim("")); // ""
+```
+
+#### `Utilify.removeAccents(value: string): string`
+
+Removes diacritical marks (accents) from a string using Unicode normalization.
+
+**Parameters:**
+
+- `value`: The string from which to remove accents
+
+**Returns:** `string` - The string without accents
+
+**Throws:** `UtilifyException` - If the input is not a string
+
+**Example:**
+
+```typescript
+console.log(Utilify.removeAccents("café")); // "cafe"
+console.log(Utilify.removeAccents("naïve")); // "naive"
+console.log(Utilify.removeAccents("résumé")); // "resume"
+console.log(Utilify.removeAccents("Björk")); // "Bjork"
+console.log(Utilify.removeAccents("São Paulo")); // "Sao Paulo"
 ```
 
 ### File Utilities

@@ -61,6 +61,12 @@ const functionMappings = {
     ),
     testInput: ["helloWorld", "Hello World", "hello-world", "HELLO-WORLD"],
   },
+  "string/remove-accents": {
+    utilify: utilify.removeAccents,
+    lodash: _.deburr,
+    ramda: null, // Ramda doesn't have removeAccents
+    testInput: ["café", "naïve", "résumé", "Björk", "São Paulo"],
+  },
 
   // Array functions
   "array/paginate": {

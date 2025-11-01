@@ -6,6 +6,7 @@ declare const Utilify: {
   readonly toKebabCase: (value: string) => string;
   readonly toSnakeCase: (value: string) => string;
   readonly trim: (value: string) => string;
+  readonly removeAccents: (value: string) => string;
   readonly getFileExtension: (filename: string) => string;
   readonly getFileSize: (
     input: import("./core/files/get-file-size").FileLike,
@@ -41,6 +42,7 @@ export { default as capitalize } from "./core/strings/capitalize";
 export { default as toKebabCase } from "./core/strings/to-kebab-case";
 export { default as toSnakeCase } from "./core/strings/to-snake-case";
 export { default as trim } from "./core/strings/trim";
+export { default as removeAccents } from "./core/strings/remove-accents";
 export { default as getFileExtension } from "./core/files/get-file-extension";
 export {
   default as getFileSize,

@@ -9,6 +9,7 @@ declare const Utilify: {
     toKebabCase: (value: string) => string;
     toSnakeCase: (value: string) => string;
     trim: (value: string) => string;
+    removeAccents: (value: string) => string;
     getFileExtension: (filename: string) => string;
     getFileSize: (input: import("./core/files/get-file-size").FileLike, unit: import("./core/files/get-file-size").FileSizeUnit) => string;
     debounce: <T extends (...args: any[]) => any>(fn: T, delay?: number) => T;
