@@ -1,6 +1,6 @@
 {
   "name": "utilifycore",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,8 +12,9 @@
     }
   },
   "scripts": {
-    "build": "rollup -c",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "build:rollup": "npm run clean && rollup -c",
+    "build:tsc": "npm run clean && tsc --project tsconfig.json",
     "prepare": "husky",
     "test": "jest",
     "test:watch": "jest --watch",

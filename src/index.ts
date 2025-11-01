@@ -30,8 +30,7 @@ const baseUtils = {
   safeRun,
   safeRunAsync,
   paginateArray,
+  createUtils,
 };
 
-const Utilify = createUtils(baseUtils, {}, { freezeResult: true });
-
-export default Utilify;
+export default createUtils(baseUtils, {}, { freezeResult: true });

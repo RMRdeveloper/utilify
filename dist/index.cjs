@@ -1,1 +1,265 @@
-"use strict";class e extends Error{constructor(e,t){super(`UtilifyException in ${e}: ${t}`),this.name="UtilifyException"}}const t={B:{divisor:1,label:"B"},KB:{divisor:1024,label:"KB"},MB:{divisor:1048576,label:"MB"},GB:{divisor:1024**3,label:"GB"},TB:{divisor:1024**4,label:"TB"}};function n(t,n){if("function"!=typeof t)throw new e(n,"First argument must be a function")}function r(e){return{success:!0,result:e}}function i(e){return{success:!1,error:e}}const o=function(e,t,n){n?.freezeBase&&Object.freeze(e);const r={...e,...t};return Object.freeze(r),r}({isJson:e=>{if("string"!=typeof e)return!1;try{return JSON.parse(e),!0}catch{return!1}},isObject:e=>"object"==typeof e&&!Array.isArray(e)&&null!==e,isEmpty:e=>null==e||("string"==typeof e?0===e.trim().length:Array.isArray(e)?0===e.length:"object"==typeof e&&0===Object.keys(e).length),capitalize:t=>{if("string"!=typeof t)throw new e("capitalize","Input must be a string");return t.charAt(0).toUpperCase()+t.slice(1)},toKebabCase:t=>{if("string"!=typeof t)throw new e("toKebabCase","Input must be a string");return t.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/[\s_]+/g,"-").toLowerCase()},toSnakeCase:t=>{if("string"!=typeof t)throw new e("toSnakeCase","Input must be a string");return t.replace(/([a-z])([A-Z])/g,"$1_$2").replace(/[\s-]+/g,"_").toLowerCase()},trim:t=>{if("string"!=typeof t)throw new e("trim","Input must be a string");return t.trim()},removeAccents:t=>{if("string"!=typeof t)throw new e("removeAccents","Input must be a string");return""===t?"":t.normalize("NFD").replace(/[\u0300-\u036f]/g,"")},getFileExtension:e=>{if(!e||"string"!=typeof e)return"";const t=e.split("?")[0].split("#")[0].split(/[/\\]/),n=t[t.length-1],r=n.lastIndexOf(".");return-1===r||0===r?"":n.substring(r+1).toLowerCase()},getFileSize:(n,r)=>{!function(n){if(!Object.keys(t).includes(n))throw new e("getFileSize",`Invalid unit '${n}': must be one of ${Object.keys(t).join(", ")}`)}(r);const i=function(t){if(t instanceof Blob||"undefined"!=typeof File&&t instanceof File)return t.size;if("undefined"!=typeof Buffer&&Buffer.isBuffer(t))return t.length;if("object"==typeof t&&null!==t&&"size"in t){const e=t.size;if("number"==typeof e&&isFinite(e)&&e>=0)return e}throw new e("getFileSize","Invalid input: expected File, Blob, Buffer, or object with valid numeric 'size' property")}(n),{divisor:o,label:s}=t[r];return`${(i/o).toFixed(2)} ${s}`},debounce:(t,n=250)=>{if("function"!=typeof t)throw new e("debounce","First argument must be a function");if("number"!=typeof n||n<0||!isFinite(n))throw new e("debounce","Delay must be a non-negative number");let r;return(...e)=>{clearTimeout(r),r=setTimeout(()=>t(...e),n)}},flow:function(...t){if(t.length<2)throw new e("flow","At least 2 functions are required");for(let n=0;n<t.length;n++)if("function"!=typeof t[n])throw new e("flow",`Argument at index ${n} is not a function`);return e=>t.reduce((e,t)=>t(e),e)},safeRun:function(e){n(e,"safeRun");try{return r(e())}catch(e){return i(e)}},safeRunAsync:async function(e){n(e,"safeRunAsync");try{return r(await e())}catch(e){return i(e)}},paginateArray:function(e,t){const n=t?.pageSize??10,r=t?.zeroBased??!1,i=t?.page??(r?0:1),o=e.length,s=Math.ceil(o/n);let u=i;r?(u<0&&(u=0),u>=s&&(u=Math.max(0,s-1))):(u<1&&(u=1),u>s&&(u=Math.max(1,s)));const a=(u-(r?0:1))*n;return{data:e.slice(a,a+n),currentPage:u,totalPages:s,totalItems:o,pageSize:n,hasNextPage:r?u<s-1:u<s,hasPreviousPage:r?u>0:u>1}}},{},{});module.exports=o;
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+const isJson = (value) => {
+    if (typeof value !== "string") {
+        return false;
+    }
+    try {
+        JSON.parse(value);
+        return true;
+    }
+    catch {
+        return false;
+    }
+};
+
+const isObject = (value) => {
+    return typeof value === "object" && !Array.isArray(value) && value !== null;
+};
+
+const isEmpty = (value) => {
+    if (value == null) {
+        return true;
+    }
+    if (typeof value === "string") {
+        return value.trim().length === 0;
+    }
+    if (Array.isArray(value)) {
+        return value.length === 0;
+    }
+    if (typeof value === "object") {
+        return Object.keys(value).length === 0;
+    }
+    return false;
+};
+
+class UtilifyException extends Error {
+    constructor(functionName, message) {
+        super(`UtilifyException in ${functionName}: ${message}`);
+        this.name = "UtilifyException";
+    }
+}
+
+const capitalize = (value) => {
+    if (typeof value !== "string") {
+        throw new UtilifyException("capitalize", "Input must be a string");
+    }
+    return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
+const toKebabCase = (value) => {
+    if (typeof value !== "string") {
+        throw new UtilifyException("toKebabCase", "Input must be a string");
+    }
+    return value
+        .replace(/([a-z])([A-Z])/g, "$1-$2")
+        .replace(/[\s_]+/g, "-")
+        .toLowerCase();
+};
+
+const toSnakeCase = (value) => {
+    if (typeof value !== "string") {
+        throw new UtilifyException("toSnakeCase", "Input must be a string");
+    }
+    return value
+        .replace(/([a-z])([A-Z])/g, "$1_$2")
+        .replace(/[\s-]+/g, "_")
+        .toLowerCase();
+};
+
+const trim = (value) => {
+    if (typeof value !== "string") {
+        throw new UtilifyException("trim", "Input must be a string");
+    }
+    return value.trim();
+};
+
+const removeAccents = (value) => {
+    if (typeof value !== "string") {
+        throw new UtilifyException("removeAccents", "Input must be a string");
+    }
+    if (value === "") {
+        return "";
+    }
+    return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const getFileExtension = (filename) => {
+    if (!filename || typeof filename !== "string") {
+        return "";
+    }
+    const cleanFilename = filename.split("?")[0].split("#")[0];
+    const parts = cleanFilename.split(/[/\\]/);
+    const file = parts[parts.length - 1];
+    const lastDotIndex = file.lastIndexOf(".");
+    if (lastDotIndex === -1 || lastDotIndex === 0) {
+        return "";
+    }
+    return file.substring(lastDotIndex + 1).toLowerCase();
+};
+
+const UNITS = {
+    B: { divisor: 1, label: "B" },
+    KB: { divisor: 1024, label: "KB" },
+    MB: { divisor: 1024 ** 2, label: "MB" },
+    GB: { divisor: 1024 ** 3, label: "GB" },
+    TB: { divisor: 1024 ** 4, label: "TB" },
+};
+function extractSize(input) {
+    if (input instanceof Blob ||
+        (typeof File !== "undefined" && input instanceof File)) {
+        return input.size;
+    }
+    if (typeof Buffer !== "undefined" && Buffer.isBuffer(input)) {
+        return input.length;
+    }
+    if (typeof input === "object" && input !== null && "size" in input) {
+        const size = input.size;
+        if (typeof size === "number" && isFinite(size) && size >= 0) {
+            return size;
+        }
+    }
+    throw new UtilifyException("getFileSize", "Invalid input: expected File, Blob, Buffer, or object with valid numeric 'size' property");
+}
+function validateUnit(unit) {
+    if (!Object.keys(UNITS).includes(unit)) {
+        throw new UtilifyException("getFileSize", `Invalid unit '${unit}': must be one of ${Object.keys(UNITS).join(", ")}`);
+    }
+}
+const getFileSize = (input, unit) => {
+    validateUnit(unit);
+    const bytes = extractSize(input);
+    const { divisor, label } = UNITS[unit];
+    const converted = bytes / divisor;
+    const formatted = converted.toFixed(2);
+    return `${formatted} ${label}`;
+};
+
+const debounce = (fn, delay = 250) => {
+    if (typeof fn !== "function") {
+        throw new UtilifyException("debounce", "First argument must be a function");
+    }
+    if (typeof delay !== "number" || delay < 0 || !isFinite(delay)) {
+        throw new UtilifyException("debounce", "Delay must be a non-negative number");
+    }
+    let timeout;
+    return ((...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn(...args), delay);
+    });
+};
+
+function flow(...fns) {
+    if (fns.length < 2) {
+        throw new UtilifyException("flow", "At least 2 functions are required");
+    }
+    for (let i = 0; i < fns.length; i++) {
+        if (typeof fns[i] !== "function") {
+            throw new UtilifyException("flow", `Argument at index ${i} is not a function`);
+        }
+    }
+    return (input) => fns.reduce((acc, fn) => fn(acc), input);
+}
+
+function paginateArray(items, opts) {
+    const pageSize = opts?.pageSize ?? 10;
+    const zeroBased = opts?.zeroBased ?? false;
+    const page = opts?.page ?? (zeroBased ? 0 : 1);
+    const totalItems = items.length;
+    const totalPages = Math.ceil(totalItems / pageSize);
+    let currentPage = page;
+    if (zeroBased) {
+        if (currentPage < 0)
+            currentPage = 0;
+        if (currentPage >= totalPages)
+            currentPage = Math.max(0, totalPages - 1);
+    }
+    else {
+        if (currentPage < 1)
+            currentPage = 1;
+        if (currentPage > totalPages)
+            currentPage = Math.max(1, totalPages);
+    }
+    const startIndex = (currentPage - (zeroBased ? 0 : 1)) * pageSize;
+    const data = items.slice(startIndex, startIndex + pageSize);
+    const hasNextPage = zeroBased
+        ? currentPage < totalPages - 1
+        : currentPage < totalPages;
+    const hasPreviousPage = zeroBased ? currentPage > 0 : currentPage > 1;
+    return {
+        data,
+        currentPage,
+        totalPages,
+        totalItems,
+        pageSize,
+        hasNextPage,
+        hasPreviousPage,
+    };
+}
+
+function validateFunction(fn, functionName) {
+    if (typeof fn !== "function") {
+        throw new UtilifyException(functionName, "First argument must be a function");
+    }
+}
+function createSuccessResult(result) {
+    return { success: true, result };
+}
+function createErrorResult(error) {
+    return { success: false, error };
+}
+function safeRun(fn) {
+    validateFunction(fn, "safeRun");
+    try {
+        const result = fn();
+        return createSuccessResult(result);
+    }
+    catch (error) {
+        return createErrorResult(error);
+    }
+}
+async function safeRunAsync(fn) {
+    validateFunction(fn, "safeRunAsync");
+    try {
+        const result = await fn();
+        return createSuccessResult(result);
+    }
+    catch (error) {
+        return createErrorResult(error);
+    }
+}
+
+function createUtils(base, ext, options) {
+    if (options?.freezeBase) {
+        Object.freeze(base);
+    }
+    const result = { ...base, ...ext };
+    if (options?.freezeResult) {
+        Object.freeze(result);
+    }
+    return result;
+}
+
+const baseUtils = {
+    isJson,
+    isObject,
+    isEmpty,
+    capitalize,
+    toKebabCase,
+    toSnakeCase,
+    trim,
+    removeAccents,
+    getFileExtension,
+    getFileSize,
+    debounce,
+    flow,
+    safeRun,
+    safeRunAsync,
+    paginateArray,
+    createUtils,
+};
+var index = createUtils(baseUtils, {}, { freezeResult: true });
+
+exports.default = index;
