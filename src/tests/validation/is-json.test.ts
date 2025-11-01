@@ -1,4 +1,4 @@
-import isJson from "../core/validation/is-json";
+import isJson from "../../core/validation/is-json";
 
 describe("isJson", () => {
   describe("valid JSON strings", () => {

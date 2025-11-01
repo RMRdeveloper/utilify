@@ -1,4 +1,4 @@
-import capitalize from "../core/strings/capitalize";
+import capitalize from "../../core/strings/capitalize";
 
 describe("capitalize", () => {
   describe("basic capitalization", () => {

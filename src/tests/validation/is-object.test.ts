@@ -1,4 +1,4 @@
-import isObject from "../core/validation/is-object";
+import isObject from "../../core/validation/is-object";
 
 describe("isObject", () => {
   describe("plain objects", () => {

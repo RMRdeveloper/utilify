@@ -1,9 +1,9 @@
-import UtilifyException from "../core/exception-handler";
+import UtilifyException from "../../core/exception-handler";
 import legacySafeRun, {
   safeRun,
   safeRunAsync,
   SafeResult,
-} from "../core/runners/safe-run";
+} from "../../core/runners/safe-run";
 
 describe("safeRun", () => {
   it("should return success result when function executes successfully", () => {

@@ -1,4 +1,4 @@
-import toKebabCase from "../core/strings/to-kebab-case";
+import toKebabCase from "../../core/strings/to-kebab-case";
 
 describe("toKebabCase", () => {
   describe("camelCase conversion", () => {

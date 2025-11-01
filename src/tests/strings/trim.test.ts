@@ -1,4 +1,4 @@
-import trim from "../core/strings/trim";
+import trim from "../../core/strings/trim";
 
 describe("trim", () => {
   describe("basic trimming", () => {

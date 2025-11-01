@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.7] - 2025-11-01
+
+### Changed
+
+- **Code Organization**: Reorganized test directory structure to mirror source code organization
+  - Moved string-related tests to `src/tests/strings/`
+  - Moved validation-related tests to `src/tests/validation/`
+  - Updated import paths in test files accordingly
+- **Type Definitions**: Standardized export format in `index.d.ts` for consistency
+  - Changed all exports to use `export { default as ... }` format
+  - Maintained backward compatibility while improving code cohesion
+
+### Fixed
+
+- **Import Paths**: Updated test file imports to reflect new directory structure
+- **Export Consistency**: Unified export patterns across the type definitions
+
+## [1.10.6] - 2025-10-30
+
+### Fixed
+
+- Documentation updates and maintenance
+
+## [1.10.5] - 2025-10-30
+
+### Fixed
+
+- Documentation updates and maintenance
+
 ## [1.10.4] - 2025-10-29
 
 ### Fixed

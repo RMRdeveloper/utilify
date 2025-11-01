@@ -1,5 +1,5 @@
-import getFileSize, { FileSizeUnit } from "../core/files/get-file-size";
-import UtilifyException from "../core/exception-handler";
+import getFileSize, { FileSizeUnit } from "../../core/files/get-file-size";
+import UtilifyException from "../../core/exception-handler";
 
 describe("getFileSize", () => {
   describe("File objects (Browser)", () => {

@@ -1,4 +1,4 @@
-import toSnakeCase from "../core/strings/to-snake-case";
+import toSnakeCase from "../../core/strings/to-snake-case";
 
 describe("toSnakeCase", () => {
   describe("camelCase conversion", () => {

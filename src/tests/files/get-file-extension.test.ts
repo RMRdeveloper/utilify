@@ -1,4 +1,4 @@
-import getFileExtension from "../core/files/get-file-extension";
+import getFileExtension from "../../core/files/get-file-extension";
 
 describe("getFileExtension", () => {
   describe("basic file extensions", () => {

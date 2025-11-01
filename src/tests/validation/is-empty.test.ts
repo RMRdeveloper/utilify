@@ -1,4 +1,4 @@
-import isEmpty from "../core/validation/is-empty";
+import isEmpty from "../../core/validation/is-empty";
 
 describe("isEmpty", () => {
   describe("empty values", () => {

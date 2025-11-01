@@ -34,19 +34,19 @@ declare const Utilify: {
 
 export default Utilify;
 export as namespace Utilify;
-export * from "./core/validation/is-json";
-export * from "./core/validation/is-object";
-export * from "./core/validation/is-empty";
-export * from "./core/strings/capitalize";
-export * from "./core/strings/to-kebab-case";
-export * from "./core/strings/to-snake-case";
+export { default as isJson } from "./core/validation/is-json";
+export { default as isObject } from "./core/validation/is-object";
+export { default as isEmpty } from "./core/validation/is-empty";
+export { default as capitalize } from "./core/strings/capitalize";
+export { default as toKebabCase } from "./core/strings/to-kebab-case";
+export { default as toSnakeCase } from "./core/strings/to-snake-case";
 export { default as trim } from "./core/strings/trim";
 export { default as getFileExtension } from "./core/files/get-file-extension";
 export {
   default as getFileSize,
   type FileSizeUnit,
 } from "./core/files/get-file-size";
-export * from "./core/execution/debounce";
+export { default as debounce } from "./core/execution/debounce";
 export { default as flow } from "./core/runners/flow";
 export {
   safeRun,
