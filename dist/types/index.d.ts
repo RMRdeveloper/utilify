@@ -1,0 +1,23 @@
+import flow from "./core/runners/flow";
+import paginateArray from "./core/arrays/paginate-array";
+import { safeRun, safeRunAsync } from "./core/runners/safe-run";
+import createUtils from "./createUtils";
+declare const _default: {
+    isJson: (value: unknown) => boolean;
+    isObject: (value: unknown) => value is Record<string, unknown>;
+    isEmpty: (value: unknown) => boolean;
+    capitalize: (value: string) => string;
+    toKebabCase: (value: string) => string;
+    toSnakeCase: (value: string) => string;
+    trim: (value: string) => string;
+    removeAccents: (value: string) => string;
+    getFileExtension: (filename: string) => string;
+    getFileSize: (input: import("./core/files/get-file-size").FileLike, unit: import("./core/files/get-file-size").FileSizeUnit) => string;
+    debounce: <T extends (...args: any[]) => any>(fn: T, delay?: number) => T;
+    flow: typeof flow;
+    safeRun: typeof safeRun;
+    safeRunAsync: typeof safeRunAsync;
+    paginateArray: typeof paginateArray;
+    createUtils: typeof createUtils;
+} & Record<string, any>;
+export default _default;

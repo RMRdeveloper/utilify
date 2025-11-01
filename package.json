@@ -1,6 +1,6 @@
 {
   "name": "utilifycore",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,7 +42,8 @@
   "homepage": "https://github.com/RMRdeveloper/utilify#readme",
   "files": [
     "dist/**/*",
-    "!dist/tests/**/*"
+    "!dist/tests/**/*",
+    "!dist/types/**/*"
   ],
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",

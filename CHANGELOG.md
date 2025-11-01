@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.2] - 2025-11-01
+
+### Changed
+
+- **Build Configuration**: Refactored rollup.config.js to use multi-entry configuration
+  - Separated TypeScript compilation and minification into distinct build steps
+  - Added rollup-plugin-dts for proper TypeScript declaration file generation
+  - Improved build performance and output organization
+- **Package Configuration**: Updated package.json files array to exclude dist/types/\*_/_ from npm package
+  - Prevents internal type declaration files from being published
+  - Reduces package size and improves distribution cleanliness
+- **Type Declaration Structure**: Reorganized type definitions with dedicated types directory
+  - Consolidated declaration files into dist/types/ for better organization
+  - Maintained backward compatibility with existing dist/index.d.ts export
+
 ## [1.11.1] - 2025-11-01
 
 ### Changed
