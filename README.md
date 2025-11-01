@@ -1,46 +1,34 @@
 # UtilifyCore
 
-[![npm version](https://img.shields.io/npm/v/utilifycore/1.10.4.svg)](https://www.npmjs.com/package/utilifycore)
+[![npm version](https://img.shields.io/npm/v/utilifycore.svg)](https://www.npmjs.com/package/utilifycore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Test Coverage](https://img.shields.io/badge/coverage-100%25_statements-4CAF50)](https://github.com/RMRdeveloper/utilify)
 [![Test Coverage](https://img.shields.io/badge/coverage-100%25_lines-4CAF50)](https://github.com/RMRdeveloper/utilify)
 [![Test Coverage](https://img.shields.io/badge/coverage-100%25_functions-4CAF50)](https://github.com/RMRdeveloper/utilify)
 
-A lightweight, type-safe utility library for JavaScript and TypeScript projects that provides essential validation, string transformation, file operations, and function utilities with **100% test coverage**.
+A lightweight, type-safe utility library for JavaScript and TypeScript projects that provides essential validation, string transformation, file operations, and function utilities.
 
 ## ✨ Features
 
 - **🏆 100% Test Coverage**: Complete statement, line, and function coverage
-- **🔒 Type-safe**: Written in TypeScript with full type definitions and runtime validation
+- **🔒 Type-safe**: Written in TypeScript with full type definitions
 - **⚡ High Performance**: Optimized for speed with minimal overhead
 - **📦 Lightweight**: Small bundle size (~9.0KB packaged, 32.1KB unpacked)
 - **🔄 ESM & CommonJS**: Supports both modern and legacy module systems
 - **🚫 Zero Dependencies**: Pure JavaScript/TypeScript implementation
 - **🌍 Cross-Environment**: Works in Node.js, browsers, and other JavaScript environments
 - **🛡️ Error Safety**: Comprehensive input validation with descriptive error messages
-- **🔧 Extensible Architecture**: Built with SOLID principles for easy extension and customization
 
 ## 📦 Installation
-
-### Prerequisites
-
-- **Node.js**: v14.0.0 or higher
-- **TypeScript**: v4.0.0 or higher (for TypeScript projects)
-
-### Install via npm
 
 ```bash
 npm install utilifycore
 ```
 
-### Install via yarn
-
 ```bash
 yarn add utilifycore
 ```
-
-### Install via pnpm
 
 ```bash
 pnpm add utilifycore
@@ -513,8 +501,6 @@ if (!networkFailure.success) {
 }
 ```
 
-## 🧪 Testing
-
 #### `Utilify.paginateArray<T>(items: T[], options?: { page?: number; pageSize?: number; zeroBased?: boolean }): Paginated<T>`
 
 Paginates an array of items with configurable options, supporting both 1-based and zero-based pagination.
@@ -568,7 +554,7 @@ console.log(zeroBased.hasPreviousPage); // false
 
 #### `Utilify.createUtils<TBase extends Record<string, any>, TExt extends Record<string, any>>(base: TBase, ext: Partial<TExt>, options?: { freezeBase?: boolean; freezeResult?: boolean }): TBase & TExt`
 
-Creates an extended utility object by shallow merging a base object with extensions. Follows SOLID principles for extensible architecture.
+Creates an extended utility object by shallow merging a base object with extensions.
 
 **Type Parameters:**
 
@@ -606,133 +592,6 @@ console.log(extendedUtils.customValidator(null)); // false
 console.log(extendedUtils.formatDate(new Date())); // "2025-10-25T..."
 ```
 
-## 🧪 Testing
-
-### Prerequisites
-
-- **Node.js**: v14.0.0 or higher
-- **npm**: v6.0.0 or higher
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
-```
-
-### Test Structure
-
-The project includes comprehensive tests covering:
-
-- **Unit Tests**: Core functionality of each utility function
-- **Integration Tests**: Cross-function interactions
-- **Edge Cases**: Invalid inputs, boundary conditions, error handling
-- **Cross-Environment**: Browser and Node.js compatibility
-
-### Coverage Report
-
-Current test coverage metrics:
-
-- **Statements**: 100%
-- **Branches**: 92.96%
-- **Functions**: 100%
-- **Lines**: 100%
-
-Coverage reports are generated in the `coverage/` directory after running `npm run test:coverage`.
-
-## 🏗️ Development
-
-### Prerequisites
-
-- **Node.js**: v14.0.0 or higher
-- **TypeScript**: v4.0.0 or higher
-
-### Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/RMRdeveloper/utilify.git
-cd utilify
-
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Build the project
-npm run build
-```
-
-### Project Structure
-
-```
-utilify/
-├── src/
-│   ├── core/
-│   │   ├── validation/     # Type validation utilities
-│   │   ├── strings/        # String manipulation utilities
-│   │   ├── files/          # File operation utilities
-│   │   ├── execution/      # Function execution utilities
-│   │   ├── runners/        # Function composition utilities
-│   │   └── exception-handler.ts
-│   ├── index.ts            # Main entry point
-│   └── index.d.ts          # TypeScript declarations
-├── tests/                  # Test files
-├── dist/                   # Built distribution files
-├── package.json
-├── tsconfig.json
-├── jest.config.js
-├── rollup.config.js
-└── README.md
-```
-
-### Building
-
-```bash
-# Build for production
-npm run build
-
-# The build outputs:
-# - dist/index.js (ESM)
-# - dist/index.cjs (CommonJS)
-# - dist/index.d.ts (TypeScript declarations)
-```
-
-### Scripts
-
-| Script                  | Description                      |
-| ----------------------- | -------------------------------- |
-| `npm run build`         | Build the project for production |
-| `npm test`              | Run all tests                    |
-| `npm run test:watch`    | Run tests in watch mode          |
-| `npm run test:coverage` | Run tests with coverage report   |
-| `npm run prepare`       | Prepare husky git hooks          |
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Guidelines
-
-1. **Code Quality**: Follow TypeScript best practices and maintain 100% test coverage
-2. **Testing**: Add tests for all new functionality and edge cases
-3. **Documentation**: Update README and JSDoc comments for new features
-4. **Compatibility**: Ensure cross-environment compatibility (Node.js + Browser)
-5. **Performance**: Optimize for performance and bundle size
-
-### Reporting Issues
-
-- **Bug Reports**: [GitHub Issues](https://github.com/RMRdeveloper/utilify/issues)
-- **Feature Requests**: [GitHub Discussions](https://github.com/RMRdeveloper/utilify/discussions)
-- **Security Issues**: Contact maintainers directly
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -744,14 +603,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Email: rmorenorodriguez16@gmail.com
 - GitHub: [@RMRdeveloper](https://github.com/RMRdeveloper)
 - LinkedIn: [Ronald Moreno](https://www.linkedin.com/in/rmrdeveloper/)
-
-## 🙏 Acknowledgments
-
-- Built with [TypeScript](https://www.typescriptlang.org/)
-- Tested with [Jest](https://jestjs.io/)
-- Built with [Rollup](https://rollupjs.org/)
-- Inspired by utility libraries like Lodash and Ramda
-
----
-
-**⭐ Star this repository if you find it useful!**
