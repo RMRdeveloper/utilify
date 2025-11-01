@@ -15,7 +15,7 @@ A lightweight, type-safe utility library for JavaScript and TypeScript projects 
 - **🔒 Type-safe**: Written in TypeScript with full type definitions
 - **⚡ High Performance**: Optimized for speed with minimal overhead
 - **📦 Lightweight**: Small bundle size (~11.2KB packaged, 47.7KB unpacked)
-- **🔄 ESM & CommonJS**: Supports both modern and legacy module systems
+- **🔄 ESM & CommonJS**: Supports both modern and legacy module systems with proper require() compatibility
 - **🚫 Zero Dependencies**: Pure JavaScript/TypeScript implementation
 - **🌍 Cross-Environment**: Works in Node.js, browsers, and other JavaScript environments
 - **🛡️ Error Safety**: Comprehensive input validation with descriptive error messages

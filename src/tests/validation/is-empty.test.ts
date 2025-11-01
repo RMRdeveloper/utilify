@@ -82,11 +82,11 @@ describe("isEmpty", () => {
     it("should handle Map and Set with entries", () => {
       const map = new Map();
       map.set("key", "value");
-      expect(isEmpty(map)).toBe(true); // isEmpty checks size property
+      expect(isEmpty(map)).toBe(false);
 
       const set = new Set();
       set.add(1);
-      expect(isEmpty(set)).toBe(true); // isEmpty checks size property
+      expect(isEmpty(set)).toBe(false);
     });
 
     it("should handle objects with properties", () => {

@@ -1,10 +1,11 @@
 /**
- * Checks if a value is empty.
+ * Checks if the provided value is empty.
+ *
+ * Returns true if the value is null, an empty string, an empty array, an empty Map or Set, or an empty object.
+ * Returns false otherwise.
  *
  * @param {unknown} value - The value to check
  * @returns {boolean} - True if the value is empty, false otherwise
- *
- * Empty values include null, undefined, empty strings, empty arrays, and objects with no keys.
  */
 const isEmpty = (value: unknown): boolean => {
   if (value == null) {
@@ -17,6 +18,10 @@ const isEmpty = (value: unknown): boolean => {
 
   if (Array.isArray(value)) {
     return value.length === 0;
+  }
+
+  if (value instanceof Map || value instanceof Set) {
+    return value.size === 0;
   }
 
   if (typeof value === "object") {
