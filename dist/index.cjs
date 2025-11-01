@@ -263,3 +263,4 @@ const baseUtils = {
 var index = createUtils(baseUtils, {}, { freezeResult: true });
 
 exports.default = index;
+module.exports = exports.default;

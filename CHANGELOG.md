@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.3] - 2025-11-01
+
+### Fixed
+
+- **CommonJS Export Issue**: Fixed `require('utilifycore')` returning `{ default: Utilify }` instead of `Utilify` directly
+  - Added `footer: "module.exports = exports.default;"` to CJS outputs in rollup.config.js
+  - Ensures proper CommonJS module exports for Node.js require() usage
+  - Maintains backward compatibility with existing import patterns
+
 ## [1.11.2] - 2025-11-01
 
 ### Changed
