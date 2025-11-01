@@ -13,9 +13,6 @@ export type SafeResult<T> =
       error: any;
     };
 
-/**
- * Internal helper to validate function parameters
- */
 function validateFunction(fn: any, functionName: string): void {
   if (typeof fn !== "function") {
     throw new UtilifyException(
@@ -25,16 +22,10 @@ function validateFunction(fn: any, functionName: string): void {
   }
 }
 
-/**
- * Internal helper to create success result
- */
 function createSuccessResult<T>(result: T): SafeResult<T> {
   return { success: true, result };
 }
 
-/**
- * Internal helper to create error result
- */
 function createErrorResult<T>(error: any): SafeResult<T> {
   return { success: false, error };
 }

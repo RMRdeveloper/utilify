@@ -10,17 +10,11 @@ export type FileSizeUnit = "B" | "KB" | "MB" | "GB" | "TB";
  */
 export type FileLike = File | Blob | Buffer | { size: number };
 
-/**
- * Configuration for size unit conversions
- */
 interface UnitConfig {
   divisor: number;
   label: string;
 }
 
-/**
- * Unit conversion configurations using binary (1024-based) system
- */
 const UNITS: Record<FileSizeUnit, UnitConfig> = {
   B: { divisor: 1, label: "B" },
   KB: { divisor: 1024, label: "KB" },
@@ -29,12 +23,6 @@ const UNITS: Record<FileSizeUnit, UnitConfig> = {
   TB: { divisor: 1024 ** 4, label: "TB" },
 };
 
-/**
- * Extracts size in bytes from various input types
- * @param input - The input object to extract size from
- * @returns The size in bytes
- * @throws UtilifyException if size cannot be extracted
- */
 function extractSize(input: FileLike): number {
   if (
     input instanceof Blob ||
@@ -60,11 +48,6 @@ function extractSize(input: FileLike): number {
   );
 }
 
-/**
- * Validates that the provided unit is supported
- * @param unit - The unit to validate
- * @throws UtilifyException if unit is invalid
- */
 function validateUnit(unit: string): asserts unit is FileSizeUnit {
   if (!Object.keys(UNITS).includes(unit)) {
     throw new UtilifyException(
@@ -96,17 +79,13 @@ function validateUnit(unit: string): asserts unit is FileSizeUnit {
  * getFileSize({ size: 1024 }, "KB") // "1.00 KB"
  */
 const getFileSize = (input: FileLike, unit: FileSizeUnit): string => {
-  // Validate unit first
   validateUnit(unit);
 
-  // Extract size (throws if invalid)
   const bytes = extractSize(input);
 
-  // Convert to requested unit
   const { divisor, label } = UNITS[unit];
   const converted = bytes / divisor;
 
-  // Format with 2 decimal places, handling precision carefully
   const formatted = converted.toFixed(2);
 
   return `${formatted} ${label}`;

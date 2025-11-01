@@ -8,6 +8,17 @@ export interface Paginated<T> {
   hasPreviousPage: boolean;
 }
 
+/**
+ * Paginates an array of items with configurable options.
+ *
+ * @template T - The type of items in the array
+ * @param items - The array of items to paginate
+ * @param opts - Optional pagination configuration
+ * @param opts.page - The page number (1-based by default, 0-based if zeroBased is true)
+ * @param opts.pageSize - Number of items per page (default: 10)
+ * @param opts.zeroBased - Whether to use 0-based page numbering (default: false)
+ * @returns The paginated result with data and metadata
+ */
 export default function paginateArray<T>(
   items: T[],
   opts?: {

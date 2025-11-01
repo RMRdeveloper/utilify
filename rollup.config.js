@@ -20,7 +20,8 @@ module.exports = [
       typescript({
         tsconfig: "./tsconfig.json",
         declaration: true,
-        declarationMap: false,
+        declarationDir: "./dist",
+        rootDir: "./src",
       }),
       terser(),
     ],
