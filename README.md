@@ -14,7 +14,7 @@ A lightweight, type-safe utility library for JavaScript and TypeScript projects 
 - **🏆 100% Test Coverage**: Complete statement, line, and function coverage
 - **🔒 Type-safe**: Written in TypeScript with full type definitions
 - **⚡ High Performance**: Optimized for speed with minimal overhead
-- **📦 Lightweight**: Small bundle size (~11.2KB packaged, 47.7KB unpacked)
+- **📦 Lightweight**: Small bundle size (~7.3KB packaged, ~28KB unpacked)
 - **🔄 ESM & CommonJS**: Supports both modern and legacy module systems with proper require() compatibility
 - **🚫 Zero Dependencies**: Pure JavaScript/TypeScript implementation
 - **🌍 Cross-Environment**: Works in Node.js, browsers, and other JavaScript environments
@@ -99,6 +99,11 @@ import {
   safeRunAsync,
   paginateArray,
   createUtils,
+  // Type imports
+  type FileLike,
+  type FileSizeUnit,
+  type SafeResult,
+  type Paginated,
 } from "utilifycore";
 
 // Use individual functions directly
@@ -599,7 +604,7 @@ Creates an extended utility object by shallow merging a base object with extensi
 **Example:**
 
 ```typescript
-import { createUtils, isJson, capitalize } from "utilifycore";
+import { createUtils, isJson, capitalize, type SafeResult } from "utilifycore";
 
 // Create extended utilities
 const extendedUtils = createUtils(

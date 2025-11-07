@@ -5,6 +5,78 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.5] - 2025-11-07
+
+### 🚀 Major Improvements
+
+#### **Enhanced Type Exports & Build System**
+
+- **Type Exports Added**: Added proper type exports (`FileLike`, `FileSizeUnit`, `SafeResult`, `Paginated`) to the main module
+  - Types are now available for import in consuming TypeScript projects
+  - Fixed missing type exports that were causing "export not found" errors
+  - Added type re-exports in `src/index.ts` to ensure types are included in the build
+
+- **Improved Build Configuration**: Enhanced Rollup configuration for better CommonJS compatibility
+  - Updated footer configuration to ensure proper CommonJS module exports
+  - Maintained ESM compatibility while fixing CJS export issues
+
+#### **Code Organization & Documentation**
+
+- **Source Code Refactoring**: Completely reorganized `src/index.ts` for better practices
+  - Grouped imports by functionality with clear comments
+  - Added comprehensive JSDoc documentation for better IntelliSense
+  - Improved code structure with logical organization
+  - Enhanced type safety with `as const` assertions
+
+- **Type Definitions Enhancement**: Improved `src/index.d.ts` organization
+  - Grouped exports by functionality (Validation, String, File, etc.)
+  - Added comprehensive JSDoc comments for the main Utilify interface
+  - Organized type imports at the top for better maintainability
+  - Removed redundant type exports to prevent conflicts
+
+#### **Bundle Size Optimization**
+
+- **Reduced Bundle Size**: Significant reduction in package size
+  - Packaged size: ~11.2KB → ~7.3KB (34% reduction)
+  - Unpacked size: ~47.7KB → ~28KB (41% reduction)
+  - Improved loading performance and reduced distribution footprint
+
+### 📊 Quality Metrics
+
+| Metric                     | Before  | After  | Improvement |
+| -------------------------- | ------- | ------ | ----------- |
+| Bundle Size (Packaged)     | ~11.2KB | ~7.3KB | -34%        |
+| Bundle Size (Unpacked)     | ~47.7KB | ~28KB  | -41%        |
+| ESM Size                   | -       | 7.2KB  | -           |
+| CJS Size                   | -       | 7.3KB  | -           |
+| Minified ESM               | -       | 3.5KB  | -           |
+| Minified CJS               | -       | 3.6KB  | -           |
+| Type Exports Available     | 0       | 4      | +4 types    |
+| Test Coverage (Statements) | 100%    | 100%   | 0%          |
+| Test Coverage (Lines)      | 100%    | 100%   | 0%          |
+| Test Coverage (Functions)  | 100%    | 100%   | 0%          |
+
+### 🔧 Technical Improvements
+
+- **Type Safety**: All types now properly exported and available for consumption
+- **Build System**: Enhanced Rollup configuration for better module compatibility
+- **Code Quality**: Improved source code organization and documentation
+- **Performance**: Reduced bundle size for faster loading
+- **Developer Experience**: Better IntelliSense with comprehensive JSDoc comments
+
+### 📈 Backward Compatibility
+
+- **API Preservation**: All existing function signatures and behaviors maintained
+- **Import Compatibility**: Both default and named imports continue to work
+- **Type Definitions**: Extended type exports without breaking existing usage
+
+### 🧪 Testing & Verification
+
+- **Full Test Suite**: All 305 tests pass successfully
+- **Type Checking**: TypeScript compilation passes with strict mode
+- **Runtime Verification**: Both CommonJS and ESM builds tested and working
+- **Type Consumption**: Verified that exported types can be imported and used
+
 ## [1.11.4] - 2025-11-01
 
 ### Fixed

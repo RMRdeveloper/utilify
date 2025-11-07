@@ -35,7 +35,7 @@ module.exports = [
         format: "cjs",
         sourcemap: false,
         exports: "named",
-        footer: "module.exports = exports.default;",
+        footer: "module.exports = exports.default || module.exports;",
       },
     ],
     plugins: [typescript(typescriptConfig)],

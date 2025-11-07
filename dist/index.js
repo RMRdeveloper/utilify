@@ -1,3 +1,14 @@
+function createUtils(base, ext, options) {
+    if (options?.freezeBase) {
+        Object.freeze(base);
+    }
+    const result = { ...base, ...ext };
+    if (options?.freezeResult) {
+        Object.freeze(result);
+    }
+    return result;
+}
+
 const isJson = (value) => {
     if (typeof value !== "string") {
         return false;
@@ -162,6 +173,38 @@ function flow(...fns) {
     return (input) => fns.reduce((acc, fn) => fn(acc), input);
 }
 
+function validateFunction(fn, functionName) {
+    if (typeof fn !== "function") {
+        throw new UtilifyException(functionName, "First argument must be a function");
+    }
+}
+function createSuccessResult(result) {
+    return { success: true, result };
+}
+function createErrorResult(error) {
+    return { success: false, error };
+}
+function safeRun(fn) {
+    validateFunction(fn, "safeRun");
+    try {
+        const result = fn();
+        return createSuccessResult(result);
+    }
+    catch (error) {
+        return createErrorResult(error);
+    }
+}
+async function safeRunAsync(fn) {
+    validateFunction(fn, "safeRunAsync");
+    try {
+        const result = await fn();
+        return createSuccessResult(result);
+    }
+    catch (error) {
+        return createErrorResult(error);
+    }
+}
+
 function paginateArray(items, opts) {
     const pageSize = opts?.pageSize ?? 10;
     const zeroBased = opts?.zeroBased ?? false;
@@ -198,49 +241,6 @@ function paginateArray(items, opts) {
     };
 }
 
-function validateFunction(fn, functionName) {
-    if (typeof fn !== "function") {
-        throw new UtilifyException(functionName, "First argument must be a function");
-    }
-}
-function createSuccessResult(result) {
-    return { success: true, result };
-}
-function createErrorResult(error) {
-    return { success: false, error };
-}
-function safeRun(fn) {
-    validateFunction(fn, "safeRun");
-    try {
-        const result = fn();
-        return createSuccessResult(result);
-    }
-    catch (error) {
-        return createErrorResult(error);
-    }
-}
-async function safeRunAsync(fn) {
-    validateFunction(fn, "safeRunAsync");
-    try {
-        const result = await fn();
-        return createSuccessResult(result);
-    }
-    catch (error) {
-        return createErrorResult(error);
-    }
-}
-
-function createUtils(base, ext, options) {
-    if (options?.freezeBase) {
-        Object.freeze(base);
-    }
-    const result = { ...base, ...ext };
-    if (options?.freezeResult) {
-        Object.freeze(result);
-    }
-    return result;
-}
-
 const baseUtils = {
     isJson,
     isObject,
@@ -259,6 +259,6 @@ const baseUtils = {
     paginateArray,
     createUtils,
 };
-var index = createUtils(baseUtils, {}, { freezeResult: true });
+const Utilify = createUtils(baseUtils, {}, { freezeResult: true });
 
-export { index as default };
+export { Utilify as default };
